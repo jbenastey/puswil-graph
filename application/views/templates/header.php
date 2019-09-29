@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/daterangepicker/daterangepicker-bs3.css">
 	<!-- bootstrap wysihtml5 - text editor -->
 	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/datatables/dataTables.bootstrap4.min.css">
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -77,25 +78,25 @@
 					<!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
 					<li class="nav-item">
-						<a href="<?=base_url()?>" class="nav-link <?php if ($this->uri->segment('2') == null) echo 'active'?>">
+						<a href="<?=base_url()?>" class="nav-link <?php if ($this->uri->segment('1') == null) echo 'active'?>">
 							<i class="nav-icon fa fa-home"></i>
 							<p class="text">Beranda</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('buku')?> <?php if ($this->uri->segment('2') == 'buku') echo 'active'?>" class="nav-link">
+						<a href="<?=base_url('buku')?>" class="nav-link <?php if ($this->uri->segment(1) == 'buku') echo 'active'?>">
 							<i class="nav-icon fa fa-book"></i>
 							<p class="text">Buku</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('pengunjung')?> <?php if ($this->uri->segment('2') == 'pengunjung') echo 'active'?>" class="nav-link">
+						<a href="<?=base_url('pengunjung')?>" class="nav-link <?php if ($this->uri->segment('1') == 'pengunjung') echo 'active'?>">
 							<i class="nav-icon fa fa-users"></i>
 							<p>Pengunjung</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('laporan')?> <?php if ($this->uri->segment('2') == 'laporan') echo 'active'?>" class="nav-link">
+						<a href="<?=base_url('laporan')?>" class="nav-link <?php if ($this->uri->segment('1') == 'laporan') echo 'active'?>">
 							<i class="nav-icon fa fa-file"></i>
 							<p>Laporan</p>
 						</a>
