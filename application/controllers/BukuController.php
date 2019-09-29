@@ -53,4 +53,26 @@ class BukuController extends CI_Controller{
 		$this->BukuModel->hapus_buku($id);
 		redirect('buku');
 	}
+	public function grafik(){
+		$this->load->view('templates/header');
+		$this->load->view('buku/grafik');
+		$this->load->view('templates/footer');
+	}
+	public function dataGrafik(){
+		$buku = $this->BukuModel->lihat_semua();
+
+		foreach($buku as $value){
+			$kategori[] = $value['buku_kategori'];
+			$kode[] = $value['buku_kode_klasifikasi'];
+			$judul[] = (float) $value['buku_jumlah_judul'];
+			$eksemplar[] = (float) $value['buku_jumlah_eksemplar'];
+		}
+		$data = array(
+			'kategori' => $kategori,
+			'kode' => $kode,
+			'judul' => $judul,
+			'eksemplar' => $eksemplar
+		);
+		echo json_encode($data);
+	}
 }

@@ -57,6 +57,8 @@ $route['buku'] = 'BukuController';
 $route['buku/tambah'] = 'BukuController/tambah';
 $route['buku/edit/(:any)'] = 'BukuController/edit/$1';
 $route['buku/hapus/(:any)'] = 'BukuController/hapus/$1';
+$route['buku/grafik'] = 'BukuController/grafik';
+$route['buku/data-grafik'] = 'BukuController/dataGrafik';
 
 $route['laporan'] = 'LaporanController';
 

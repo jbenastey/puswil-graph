@@ -16,7 +16,8 @@
 				<div class="card">
 					<div class="card-header">
 						Data Buku
-						<a href="<?=base_url('buku/tambah')?>" class="btn btn-primary btn-sm float-right">Tambah Data Buku</a>
+						<a href="<?=base_url('buku/tambah')?>" class="btn btn-primary btn-sm float-right"><i class="fa fa-plus"></i> Tambah Data Buku</a><span class="float-right">&nbsp;</span>
+						<a href="<?=base_url('buku/grafik')?>" class="btn btn-secondary btn-sm float-right"><i class="fa fa-bar-chart"></i> Lihat Grafik</a>
 					</div>
 					<div class="card-body">
 						<table id="example1" class="table table-bordered">

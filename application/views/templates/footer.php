@@ -54,7 +54,9 @@
 <script src="<?=base_url()?>assets/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- AdminLTE for demo purposes -->
+<script src="<?=base_url()?>assets/plugins/chart.js/Chart.min.js"></script>
 <script src="<?=base_url()?>assets/dist/js/demo.js"></script>
+<script src="<?=base_url()?>assets/dist/js/grafik/buku.js"></script>
 
 <script>
 	$(function () {
