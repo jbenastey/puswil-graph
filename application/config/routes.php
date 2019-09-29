@@ -54,5 +54,10 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['buku'] = 'BukuController';
+$route['buku/tambah'] = 'BukuController/tambah';
+$route['buku/edit/(:any)'] = 'BukuController/edit/$1';
+$route['buku/hapus/(:any)'] = 'BukuController/hapus/$1';
+
 $route['laporan'] = 'LaporanController';
+
 $route['pengunjung'] = 'PengunjungController';
