@@ -14,11 +14,36 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
-					<div class="card-header">
-						Grafik Buku
+					<div class="card-header d-flex">
+						<div class="card-title">Grafik Buku</div>
 						</div>
 					<div class="card-body">
-						<canvas id="sales-chart" width="1000" height="280"></canvas>
+						Bar
+						<hr>
+						<div class="chart">
+							<canvas id="sales-chart" width="1000" height="280"></canvas>
+						</div>
+						<hr>
+						Line
+						<hr>
+						<div class="chart">
+							<canvas id="sales-chart2" width="1000" height="280"></canvas>
+						</div>
+						<hr>
+						Pie
+						<hr>
+						<div class="row">
+							<div class="col-6">
+								<div class="chart">
+									<canvas id="sales-chart3" width="1000" height="280"></canvas>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="chart">
+									<canvas id="sales-chart4" width="1000" height="280"></canvas>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
