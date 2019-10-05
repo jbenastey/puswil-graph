@@ -21,7 +21,7 @@
 
 					</div>
 					<div class="card-body">
-						<table id="example1" class="table table-bordered">
+						<table id="example1" class="table table-bordered table-responsive">
 							<thead>
 							<tr>
 								<th>No</th>
@@ -33,34 +33,39 @@
 								<th>Mahasiswa PR</th>
 								<th>Umum LK</th>
 								<th>Umum PR</th>
+								<th>Jumlah LK</th>
+								<th>Jumlah PR</th>
 								<th>Total</th>
+								<th>Aksi</th>
 							</tr>
 							</thead>
 							<tbody>
+							<?php
+							$no = 1;
+							foreach ($pengunjung as $key=>$value):
+							?>
 							<tr>
-								<td>1</td>
-								<td>asdsd</td>
-								<td>asdsd</td>
-								<td>asddsadas</td>
-								<td>asddas</td>
-								<td>asddsad</td>
-								<td>asddsa</td>
-								<td>asddsa</td>
-								<td>asddsa</td>
-								<td>asddsa</td>
+								<td><?=$no?></td>
+								<td><?=$value['pengunjung_tipe']?></td>
+								<td><?=$value['pengunjung_tahun']?></td>
+								<td><?=$value['pengunjung_pelajar_lk']?></td>
+								<td><?=$value['pengunjung_pelajar_pr']?></td>
+								<td><?=$value['pengunjung_mahasiswa_lk']?></td>
+								<td><?=$value['pengunjung_mahasiswa_pr']?></td>
+								<td><?=$value['pengunjung_umum_lk']?></td>
+								<td><?=$value['pengunjung_umum_pr']?></td>
+								<td><?=$value['pengunjung_umum_lk'] + $value['pengunjung_mahasiswa_lk'] + $value['pengunjung_pelajar_lk']?>  </td>
+								<td><?=$value['pengunjung_umum_pr'] + $value['pengunjung_mahasiswa_pr'] + $value['pengunjung_pelajar_pr']?>  </td>
+								<td><?=$value['pengunjung_umum_lk'] + $value['pengunjung_mahasiswa_lk'] + $value['pengunjung_pelajar_lk'] + $value['pengunjung_umum_pr'] + $value['pengunjung_mahasiswa_pr'] + $value['pengunjung_pelajar_pr']?></td>
+								<td>
+									<a href="<?=base_url('pengunjung/edit/'.$value['pengunjung_id'])?>" class="btn btn-success btn-sm" title="edit"><i class="fa fa-pencil"></i></a>
+									<a href="<?=base_url('pengunjung/hapus/'.$value['pengunjung_id'])?>" class="btn btn-danger btn-sm" title="hapus" onclick="return confirm('hapus data pengunjung?')"><i class="fa fa-trash"></i></a>
+								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>asdsd</td>
-								<td>asdsd</td>
-								<td>asddsadas</td>
-								<td>asddas</td>
-								<td>asddsad</td>
-								<td>asddsa</td>
-								<td>asddsa</td>
-								<td>asddsa</td>
-								<td>asddsa</td>
-							</tr>
+							<?php
+							$no++;
+							endforeach;
+							?>
 							</tbody>
 						</table>
 					</div>

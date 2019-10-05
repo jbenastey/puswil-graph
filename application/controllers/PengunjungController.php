@@ -7,8 +7,11 @@ class PengunjungController extends CI_Controller{
 		$this->load->model('PengunjungModel');
 	}
 	public function index(){
+		$data = array(
+			'pengunjung' => $this->PengunjungModel->lihat_semua()
+		);
 		$this->load->view('templates/header');
-		$this->load->view('pengunjung/index');
+		$this->load->view('pengunjung/index',$data);
 		$this->load->view('templates/footer');
 	}
 	public function tambah(){
