@@ -16,6 +16,9 @@
 				<div class="card">
 					<div class="card-header">
 						Data Pengunjung
+						<a href="<?=base_url('pengunjung/tambah')?>" class="btn btn-primary btn-sm float-right"><i class="fa fa-plus"></i> Tambah Data Pengunjung</a><span class="float-right">&nbsp;</span>
+						<a href="<?=base_url('pengunjung/grafik')?>" class="btn btn-secondary btn-sm float-right"><i class="fa fa-bar-chart"></i> Lihat Grafik</a>
+
 					</div>
 					<div class="card-body">
 						<table id="example1" class="table table-bordered">

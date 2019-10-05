@@ -21,20 +21,42 @@
 						<form method="post" action="<?=base_url('pengunjung/tambah')?>">
 							<div class="card-body">
 								<div class="form-group">
-									<label>Kategori</label>
-									<input type="text" class="form-control" name="kategori" placeholder="Kategori">
+									<label>Tahun</label>
+									<input type="number" max="2100" min="2000" class="form-control" name="tahun" placeholder="Tahun" required>
 								</div>
 								<div class="form-group">
-									<label>Kode Klasifikasi</label>
-									<input type="number" class="form-control" name="kode" placeholder="Kode">
+									<label>Uraian</label>
+									<select name="uraian" class="form-control" required>
+										<option selected disabled>- Pilih Uraian -</option>
+										<option value="PENGUNJUNG">Pengunjung</option>
+										<option value="PEMINJAMAN">Peminjaman</option>
+										<option value="PENGEMBALIAN">Pengembalian</option>
+										<option value="ANGGOTA">Anggota</option>
+									</select>
 								</div>
 								<div class="form-group">
-									<label>Jumlah Judul</label>
-									<input type="number" class="form-control" name="judul" placeholder="Jumlah Judul">
+									<label>Jumlah Pelajar Laki-Laki</label>
+									<input type="number" class="form-control" name="pelajar-lk" placeholder="Pelajar Laki-Laki" required>
 								</div>
 								<div class="form-group">
-									<label>Jumlah Eksemplar</label>
-									<input type="number" class="form-control" name="eksemplar" placeholder="Jumlah Eksemplar">
+									<label>Jumlah Pelajar Perempuan</label>
+									<input type="number" class="form-control" name="pelajar-pr" placeholder="Pelajar Perempuan" required>
+								</div>
+								<div class="form-group">
+									<label>Jumlah Mahasiswa Laki-Laki</label>
+									<input type="number" class="form-control" name="mahasiswa-lk" placeholder="Mahasiswa Laki-Laki" required>
+								</div>
+								<div class="form-group">
+									<label>Jumlah Mahasiswa Perempuan</label>
+									<input type="number" class="form-control" name="mahasiswa-pr" placeholder="Mahasiswa Perempuan" required>
+								</div>
+								<div class="form-group">
+									<label>Jumlah Pengunjung Umum Laki-Laki</label>
+									<input type="number" class="form-control" name="umum-lk" placeholder="Pengunjung Laki-Laki" required>
+								</div>
+								<div class="form-group">
+									<label>Jumlah Pengunjung Umum Perempuan</label>
+									<input type="number" class="form-control" name="umum-pr" placeholder="Pengunjung Perempuan" required>
 								</div>
 							</div>
 							<!-- /.card-body -->
