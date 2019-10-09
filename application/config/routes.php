@@ -64,3 +64,5 @@ $route['laporan'] = 'LaporanController';
 
 $route['pengunjung'] = 'PengunjungController';
 $route['pengunjung/tambah'] = 'PengunjungController/tambah';
+$route['pengunjung/grafik'] = 'PengunjungController/grafik';
+$route['pengunjung/data-grafik'] = 'PengunjungController/dataGrafik';

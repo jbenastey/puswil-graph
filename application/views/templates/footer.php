@@ -57,6 +57,7 @@
 <script src="<?=base_url()?>assets/plugins/chart.js/Chart.min.js"></script>
 <script src="<?=base_url()?>assets/dist/js/demo.js"></script>
 <script src="<?=base_url()?>assets/dist/js/grafik/buku.js"></script>
+<script src="<?=base_url()?>assets/dist/js/grafik/pengunjung.js"></script>
 
 <script>
 	$(function () {

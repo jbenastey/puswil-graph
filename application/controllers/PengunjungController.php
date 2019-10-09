@@ -34,5 +34,36 @@ class PengunjungController extends CI_Controller{
 			$this->load->view('templates/footer');
 		}
 	}
+	public function grafik(){
+		$this->load->view('templates/header');
+		$this->load->view('pengunjung/grafik');
+		$this->load->view('templates/footer');
+	}
+	public function dataGrafik(){
+		$pengunjung = $this->PengunjungModel->lihat_semua();
 
+		foreach($pengunjung as $value){
+			$label[] = $value['pengunjung_tipe'].', '.$value['pengunjung_tahun'];
+			$uraian[] = $value['pengunjung_tipe'];
+			$tahun[] = $value['pengunjung_tahun'];
+			$pelajar_lk[] = (float) $value['pengunjung_pelajar_lk'];
+			$pelajar_pr[] = (float) $value['pengunjung_pelajar_pr'];
+			$mahasiswa_lk[] = (float) $value['pengunjung_mahasiswa_lk'];
+			$mahasiswa_pr[] = (float) $value['pengunjung_mahasiswa_pr'];
+			$umum_lk[] = (float) $value['pengunjung_umum_lk'];
+			$umum_pr[] = (float) $value['pengunjung_umum_pr'];
+		}
+		$data = array(
+			'label' => $label,
+			'uraian' => $uraian,
+			'tahun' => $tahun,
+			'pelajar_lk' => $pelajar_lk,
+			'pelajar_pr' => $pelajar_pr,
+			'mahasiswa_lk' => $mahasiswa_lk,
+			'mahasiswa_pr' => $mahasiswa_pr,
+			'umum_lk' => $umum_lk,
+			'umum_pr' => $umum_pr
+		);
+		echo json_encode($data);
+	}
 }
