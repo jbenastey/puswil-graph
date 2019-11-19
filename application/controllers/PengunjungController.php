@@ -5,6 +5,10 @@ class PengunjungController extends CI_Controller{
 	{
 		parent::__construct();
 		$this->load->model('PengunjungModel');
+
+		if (!$this->session->has_userdata('pengguna_id')) {
+			redirect(base_url('login'));
+		}
 	}
 	public function index(){
 		$data = array(
