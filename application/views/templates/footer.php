@@ -61,7 +61,7 @@
 
 <script>
 	$(function () {
-		$("#example1").DataTable();
+		$('table.example1').DataTable();
 	});
 </script>
 </body>
