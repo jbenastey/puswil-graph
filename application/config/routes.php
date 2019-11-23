@@ -69,6 +69,7 @@ $route['pengunjung/data-grafik'] = 'PengunjungController/dataGrafik';
 
 $route['upload'] = 'ProsesController/upload';
 $route['mentah'] = 'ProsesController/excel';
+$route['dimensi'] = 'ProsesController/dimensi';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';

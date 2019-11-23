@@ -94,7 +94,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('pengunjung')?>" class="nav-link <?php if ($this->uri->segment('1') == 'pengunjung') echo 'active'?>">
+						<a href="<?=base_url('dimensi')?>" class="nav-link <?php if ($this->uri->segment('1') == 'dimensi') echo 'active'?>">
 							<i class="nav-icon fa fa-file-o"></i>
 							<p>Tabel Dimensi</p>
 						</a>

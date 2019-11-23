@@ -161,4 +161,15 @@ class ProsesController extends CI_Controller
 		$this->load->view('excel/index', $data);
 		$this->load->view('templates/footer');
 	}
+	public function dimensi(){
+		$data = array(
+			'anggota' => $this->proses->lihat('excel_anggota'),
+			'buku' => $this->proses->lihat('excel_buku'),
+			'peminjam' => $this->proses->lihat('excel_peminjam'),
+			'pengunjung' => $this->proses->lihat('excel_pengunjung'),
+		);
+		$this->load->view('templates/header');
+		$this->load->view('dimensi/index', $data);
+		$this->load->view('templates/footer');
+	}
 }
