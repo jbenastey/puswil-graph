@@ -47,4 +47,8 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function insert_dimensi($table,$data){
+		$this->db->insert_batch($table, $data);
+	}
 }

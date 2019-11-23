@@ -15,7 +15,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<a href="" class="btn btn-outline-primary btn-sm float-right"><i class="fa fa-refresh"></i> Refresh</a>
+						<a href="<?= base_url('refresh') ?>" class="btn btn-outline-primary btn-sm float-right"><i class="fa fa-refresh"></i> Refresh</a>
 						<ul class="nav nav-pills ml-auto">
 							<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">dim_anggota</a></li>
 							<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">dim_buku</a></li>
@@ -35,6 +35,19 @@
 										<th>nomor_anggota</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($anggota as $key=>$value):
+									?>
+									<tr>
+										<td><?= $value['id_anggota'] ?></td>
+										<td><?= $value['nama_anggota'] ?></td>
+										<td><?= $value['nomor_anggota'] ?></td>
+									</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
@@ -46,6 +59,18 @@
 										<th>judul_buku</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($buku as $key=>$value):
+										?>
+										<tr>
+											<td><?= $value['id_buku'] ?></td>
+											<td><?= $value['judul_buku'] ?></td>
+										</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
@@ -58,6 +83,19 @@
 										<th>nomor_anggota</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($peminjam as $key=>$value):
+										?>
+										<tr>
+											<td><?= $value['id_peminjam'] ?></td>
+											<td><?= $value['nama_peminjam'] ?></td>
+											<td><?= $value['nomor_anggota'] ?></td>
+										</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
@@ -70,6 +108,19 @@
 										<th>nik_pengunjung</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($pengunjung as $key=>$value):
+										?>
+										<tr>
+											<td><?= $value['id_pengunjung'] ?></td>
+											<td><?= $value['nama_pengunjung'] ?></td>
+											<td><?= $value['nik_pengunjung'] ?></td>
+										</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
@@ -84,6 +135,21 @@
 										<th>tahun_waktu</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($waktu as $key=>$value):
+										?>
+										<tr>
+											<td><?= $value['id_waktu'] ?></td>
+											<td><?= $value['waktu'] ?></td>
+											<td><?= $value['hari_waktu'] ?></td>
+											<td><?= $value['bulan_waktu'] ?></td>
+											<td><?= $value['tahun_waktu'] ?></td>
+										</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
