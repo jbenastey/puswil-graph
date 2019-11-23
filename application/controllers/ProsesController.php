@@ -152,7 +152,10 @@ class ProsesController extends CI_Controller
 
 	public function excel(){
 		$data = array(
-
+			'anggota' => $this->proses->lihat('excel_anggota'),
+			'buku' => $this->proses->lihat('excel_buku'),
+			'peminjam' => $this->proses->lihat('excel_peminjam'),
+			'pengunjung' => $this->proses->lihat('excel_pengunjung'),
 		);
 		$this->load->view('templates/header');
 		$this->load->view('excel/index', $data);

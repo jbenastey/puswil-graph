@@ -47,6 +47,24 @@
 										<th>P</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($anggota as $key=>$value):
+									?>
+									<tr>
+										<td><?= $value['anggota_nama'] ?></td>
+										<td><?= $value['anggota_nomor'] ?></td>
+										<td><?= $value['anggota_umum_l'] ?></td>
+										<td><?= $value['anggota_umum_p'] ?></td>
+										<td><?= $value['anggota_mahasiswa_l'] ?></td>
+										<td><?= $value['anggota_mahasiswa_p'] ?></td>
+										<td><?= $value['anggota_pelajar_l'] ?></td>
+										<td><?= $value['anggota_pelajar_p'] ?></td>
+									</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
@@ -54,11 +72,32 @@
 								<table class="table table-bordered table-striped example1">
 									<thead>
 									<tr>
-										<th>adds</th>
-										<th>adds</th>
-										<th>adds</th>
+										<th>ID Buku</th>
+										<th>Judul</th>
+										<th>Edisi</th>
+										<th>Penerbit</th>
+										<th>Deskripsi Fisik</th>
+										<th>Subjek</th>
+										<th>Eksemplar</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($buku as $key=>$value):
+									?>
+									<tr>
+										<td><?= $value['buku_id'] ?></td>
+										<td><?= $value['buku_judul'] ?></td>
+										<td><?= $value['buku_edisi'] ?></td>
+										<td><?= $value['buku_penerbit'] ?></td>
+										<td><?= $value['buku_fisik'] ?></td>
+										<td><?= $value['buku_subjek'] ?></td>
+										<td><?= $value['buku_eksemplar'] ?></td>
+									</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
@@ -94,6 +133,34 @@
 										<th>P</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($peminjam as $key=>$value):
+									?>
+									<tr>
+										<td><?= $value['peminjam_nama'] ?></td>
+										<td><?= $value['peminjam_no_anggota'] ?></td>
+										<td><?= $value['peminjam_umum_l'] ?></td>
+										<td><?= $value['peminjam_umum_p'] ?></td>
+										<td><?= $value['peminjam_mahasiswa_l'] ?></td>
+										<td><?= $value['peminjam_mahasiswa_p'] ?></td>
+										<td><?= $value['peminjam_pelajar_l'] ?></td>
+										<td><?= $value['peminjam_pelajar_p'] ?></td>
+										<td><?= $value['peminjam_klas_000'] ?></td>
+										<td><?= $value['peminjam_klas_100'] ?></td>
+										<td><?= $value['peminjam_klas_200'] ?></td>
+										<td><?= $value['peminjam_klas_300'] ?></td>
+										<td><?= $value['peminjam_klas_400'] ?></td>
+										<td><?= $value['peminjam_klas_500'] ?></td>
+										<td><?= $value['peminjam_klas_600'] ?></td>
+										<td><?= $value['peminjam_klas_700'] ?></td>
+										<td><?= $value['peminjam_klas_800'] ?></td>
+										<td><?= $value['peminjam_klas_900'] ?></td>
+									</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
@@ -119,6 +186,24 @@
 										<th>P</th>
 									</tr>
 									</thead>
+									<tbody>
+									<?php
+									foreach($pengunjung as $key=>$value):
+									?>
+									<tr>
+										<td><?= $value['pengunjung_nama'] ?></td>
+										<td><?= $value['pengunjung_nik'] ?></td>
+										<td><?= $value['pengunjung_umum_l'] ?></td>
+										<td><?= $value['pengunjung_umum_p'] ?></td>
+										<td><?= $value['pengunjung_mahasiswa_l'] ?></td>
+										<td><?= $value['pengunjung_mahasiswa_p'] ?></td>
+										<td><?= $value['pengunjung_pelajar_l'] ?></td>
+										<td><?= $value['pengunjung_pelajar_p'] ?></td>
+									</tr>
+									<?php
+									endforeach;
+									?>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->

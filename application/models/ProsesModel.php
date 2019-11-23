@@ -41,4 +41,10 @@ class ProsesModel extends CI_Model
 	public function insert_pengunjung($data){
 		$this->db->insert_batch('excel_pengunjung', $data);
 	}
+
+	public function lihat($table){
+		$this->db->from($table);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }
