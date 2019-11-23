@@ -74,7 +74,11 @@
 				</div>
 				<div class="form-group">
 					<label>Upload</label>
-					<input type="file" class="form-control" name="excel" placeholder="Kategori">
+					<input type="file" class="form-control" name="excel" placeholder="Kategori"><br>
+					<div class="alert alert-info alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h6><i class="icon fa fa-info"></i> Pastikan jumlah baris data pada setiap sheet sama!</h6>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
