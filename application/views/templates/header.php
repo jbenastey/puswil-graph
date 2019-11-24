@@ -29,7 +29,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<link rel="shortcut icon" href="<?=base_url()?>assets/dist/img/iconBuku2.png">
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse">
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
 	<!-- Navbar -->
@@ -88,21 +88,21 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('buku')?>" class="nav-link <?php if ($this->uri->segment(1) == 'buku') echo 'active'?>">
-							<i class="nav-icon fa fa-book"></i>
-							<p class="text">Buku</p>
+						<a href="<?=base_url('mentah')?>" class="nav-link <?php if ($this->uri->segment(1) == 'mentah') echo 'active'?>">
+							<i class="nav-icon fa fa-file-excel-o"></i>
+							<p class="text">Data Excel</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('pengunjung')?>" class="nav-link <?php if ($this->uri->segment('1') == 'pengunjung') echo 'active'?>">
-							<i class="nav-icon fa fa-users"></i>
-							<p>Pengunjung</p>
+						<a href="<?=base_url('dimensi')?>" class="nav-link <?php if ($this->uri->segment('1') == 'dimensi') echo 'active'?>">
+							<i class="nav-icon fa fa-file-o"></i>
+							<p>Tabel Dimensi</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('laporan')?>" class="nav-link <?php if ($this->uri->segment('1') == 'laporan') echo 'active'?>">
+						<a href="<?=base_url('fakta')?>" class="nav-link <?php if ($this->uri->segment('1') == 'fakta') echo 'active'?>">
 							<i class="nav-icon fa fa-file"></i>
-							<p>Laporan</p>
+							<p>Tabel Fakta</p>
 						</a>
 					</li>
 				</ul>

@@ -53,19 +53,14 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['buku'] = 'BukuController';
-$route['buku/tambah'] = 'BukuController/tambah';
-$route['buku/edit/(:any)'] = 'BukuController/edit/$1';
-$route['buku/hapus/(:any)'] = 'BukuController/hapus/$1';
-$route['buku/grafik'] = 'BukuController/grafik';
-$route['buku/data-grafik'] = 'BukuController/dataGrafik';
+$route['upload'] = 'ProsesController/upload';
+$route['mentah'] = 'ProsesController/excel';
+$route['dimensi'] = 'ProsesController/dimensi';
+$route['refresh'] = 'ProsesController/refresh';
+$route['fakta'] = 'ProsesController/fakta';
+$route['refresh_fakta'] = 'ProsesController/refreshFakta';
 
-$route['laporan'] = 'LaporanController';
-
-$route['pengunjung'] = 'PengunjungController';
-$route['pengunjung/tambah'] = 'PengunjungController/tambah';
-$route['pengunjung/grafik'] = 'PengunjungController/grafik';
-$route['pengunjung/data-grafik'] = 'PengunjungController/dataGrafik';
+$route['grafik_anggota'] = 'ProsesController/grafik_anggota';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
