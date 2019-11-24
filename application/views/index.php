@@ -12,9 +12,9 @@
 	<div class="container-fluid">
 		<!-- Small boxes (Stat box) -->
 		<div class="row">
-			<div class="col-lg-4 col-6">
+			<div class="col-lg-3 col-6">
 				<!-- small box -->
-				<div class="small-box bg-info">
+				<div class="small-box bg-secondary-gradient">
 					<div class="inner">
 						<h3>&nbsp;</h3>
 
@@ -27,31 +27,44 @@
 						Upload Data <i class="fa fa-arrow-circle-right"></i>
 					</a>
 				</div>
-			</div><div class="col-lg-4 col-6">
+			</div><div class="col-lg-3 col-6">
 				<!-- small box -->
-				<div class="small-box bg-info">
+				<div class="small-box bg-success-gradient">
 					<div class="inner">
 						<h3>&nbsp;</h3>
 
 						<p>Data Excel</p>
 					</div>
 					<div class="icon">
-						<i class="fa fa-file-o"></i>
+						<i class="fa fa-file-excel-o"></i>
 					</div>
 					<a href="<?= base_url('mentah') ?>" class="small-box-footer">Lihat Data <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
-			</div><div class="col-lg-4 col-6">
+			</div><div class="col-lg-3 col-6">
 				<!-- small box -->
-				<div class="small-box bg-info">
+				<div class="small-box bg-info-gradient">
 					<div class="inner">
 						<h3>&nbsp;</h3>
 
-						<p>Data Hasil </p>
+						<p>Tabel Dimensi </p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-file-o"></i>
+					</div>
+					<a href="<?= base_url('dimensi') ?>" class="small-box-footer">Lihat Data <i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div><div class="col-lg-3 col-6">
+				<!-- small box -->
+				<div class="small-box bg-primary-gradient">
+					<div class="inner">
+						<h3>&nbsp;</h3>
+
+						<p>Tabel Fakta </p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-file"></i>
 					</div>
-					<a href="#" class="small-box-footer">Lihat Data <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="<?= base_url('fakta') ?>" class="small-box-footer">Lihat Data <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 		</div>
