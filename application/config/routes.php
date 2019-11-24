@@ -71,6 +71,8 @@ $route['upload'] = 'ProsesController/upload';
 $route['mentah'] = 'ProsesController/excel';
 $route['dimensi'] = 'ProsesController/dimensi';
 $route['refresh'] = 'ProsesController/refresh';
+$route['fakta'] = 'ProsesController/fakta';
+$route['refresh_fakta'] = 'ProsesController/refreshFakta';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';

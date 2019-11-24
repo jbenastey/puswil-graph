@@ -100,7 +100,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?=base_url('laporan')?>" class="nav-link <?php if ($this->uri->segment('1') == 'laporan') echo 'active'?>">
+						<a href="<?=base_url('fakta')?>" class="nav-link <?php if ($this->uri->segment('1') == 'fakta') echo 'active'?>">
 							<i class="nav-icon fa fa-file"></i>
 							<p>Tabel Fakta</p>
 						</a>

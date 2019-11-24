@@ -330,6 +330,64 @@ class ProsesController extends CI_Controller
 		redirect('dimensi');
 	}
 
+	public function fakta(){
+		$data = array(
+			'fakta' => $this->proses->lihat('fact_peminjaman')
+		);
+		$this->load->view('templates/header');
+		$this->load->view('fakta/index', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function refreshFakta(){
+		$data = $this->proses->lihat('fact_peminjaman');
+
+		$dataDimensi = array(
+			'anggota' => $this->proses->lihat('dim_anggota'),
+			'buku' => $this->proses->lihat('dim_buku'),
+			'peminjam' => $this->proses->lihat('dim_peminjam'),
+			'pengunjung' => $this->proses->lihat('dim_pengunjung'),
+			'waktu' => $this->proses->lihat('dim_waktu'),
+		);
+
+		$dataFakta = array();
+
+		if (count($data) == 0){
+			foreach ($dataDimensi['anggota'] as $key=>$value) {
+				array_push($dataFakta, array(
+					'id_anggota' => $value['id_anggota'],
+					'id_peminjam' => $dataDimensi['peminjam'][$key]['id_peminjam'],
+					'id_pengunjung' => $dataDimensi['pengunjung'][$key]['id_pengunjung'],
+					'id_buku' => $dataDimensi['buku'][$key]['id_buku'],
+					'id_waktu' => $dataDimensi['waktu'][$key]['id_waktu'],
+				));
+			}
+			$this->proses->insert_dimensi('fact_peminjaman', $dataFakta);
+		} elseif (count($data) == count($dataDimensi['anggota'])) {
+			$dataFakta = null;
+		} else {
+			foreach ($data as $key => $value) {
+				if ($value['id_anggota'] == $dataDimensi['anggota'][$key]['id_anggota']) {
+					unset($data[$key]);
+				}
+			}
+			foreach ($dataDimensi['anggota'] as $key=>$value) {
+				array_push($dataFakta, array(
+					'id_anggota' => $value['id_anggota'],
+					'id_peminjam' => $dataDimensi['peminjam'][$key]['id_peminjam'],
+					'id_pengunjung' => $dataDimensi['pengunjung'][$key]['id_pengunjung'],
+					'id_buku' => $dataDimensi['buku'][$key]['id_buku'],
+					'id_waktu' => $dataDimensi['waktu'][$key]['id_waktu'],
+				));
+			}
+			$this->proses->insert_dimensi('fact_peminjaman', $dataFakta);
+		}
+//		echo "<pre>";
+//		print_r ($dataFakta);
+//		echo "</pre>";
+		redirect('fakta');
+	}
+
 	function hari($days){
 		$hari = array(
 			'Monday' => 'Senin',
