@@ -388,6 +388,7 @@ class ProsesController extends CI_Controller
 		redirect('fakta');
 	}
 
+	//-----------------------------------------------------------------------------------------
 	function hari($days){
 		$hari = array(
 			'Monday' => 'Senin',
@@ -399,5 +400,32 @@ class ProsesController extends CI_Controller
 			'Sunday' => 'Minggu',
 		);
 		return $hari[$days];
+	}
+	//-----------------------------------------------------------------------------------------
+
+	public function grafik_anggota(){
+		$anggota = $this->proses->lihat('excel_anggota');
+		$data = array(
+			'umum' => 0,
+			'mahasiswa' => 0,
+			'pelajar' => 0,
+		);
+		foreach ($anggota as $key=>$value) {
+			if ($value['anggota_umum_l'] != null){
+				$data['umum'] += 1;
+			}elseif ($value['anggota_umum_p'] != null){
+				$data['umum'] += 1;
+			}elseif ($value['anggota_mahasiswa_l'] != null){
+				$data['mahasiswa'] += 1;
+			}elseif ($value['anggota_mahasiswa_p'] != null){
+				$data['mahasiswa'] += 1;
+			}elseif ($value['anggota_pelajar_l'] != null){
+				$data['pelajar'] += 1;
+			}elseif ($value['anggota_pelajar_p'] != null){
+				$data['pelajar'] += 1;
+			}
+		}
+		echo json_encode($data);
+
 	}
 }
