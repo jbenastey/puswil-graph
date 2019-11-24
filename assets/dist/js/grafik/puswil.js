@@ -18,8 +18,63 @@ $(document).ready(function () {
 		dataType: 'json',
 		success: function (response) {
 			console.log(response);
-			var $salesChart = $('#anggota-pie-chart');
-			var salesChart2 = new Chart($salesChart, {
+			var anggota_bar = $('#anggota-bar-chart');
+			var salesChart = new Chart(anggota_bar, {
+				type: 'bar',
+				data: {
+					labels: ["Mahasiswa", "Umum", "Pelajar"],
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data: [
+								response.mahasiswa,
+								response.umum,
+								response.pelajar,]
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Anggota Berdasarkan Kategori',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						yAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+			var anggota_pie = $('#anggota-pie-chart');
+			var salesChart2 = new Chart(anggota_pie, {
 				type: 'pie',
 				data: {
 					labels: ["Mahasiswa", "Umum", "Pelajar"],
