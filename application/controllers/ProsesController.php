@@ -409,23 +409,30 @@ class ProsesController extends CI_Controller
 			'umum' => 0,
 			'mahasiswa' => 0,
 			'pelajar' => 0,
+			'pria' => 0,
+			'wanita' => 0,
 		);
 		foreach ($anggota as $key=>$value) {
 			if ($value['anggota_umum_l'] != null){
 				$data['umum'] += 1;
+				$data['pria'] += 1;
 			}elseif ($value['anggota_umum_p'] != null){
 				$data['umum'] += 1;
+				$data['wanita'] += 1;
 			}elseif ($value['anggota_mahasiswa_l'] != null){
 				$data['mahasiswa'] += 1;
+				$data['pria'] += 1;
 			}elseif ($value['anggota_mahasiswa_p'] != null){
 				$data['mahasiswa'] += 1;
+				$data['wanita'] += 1;
 			}elseif ($value['anggota_pelajar_l'] != null){
 				$data['pelajar'] += 1;
+				$data['pria'] += 1;
 			}elseif ($value['anggota_pelajar_p'] != null){
 				$data['pelajar'] += 1;
+				$data['wanita'] += 1;
 			}
 		}
 		echo json_encode($data);
-
 	}
 }

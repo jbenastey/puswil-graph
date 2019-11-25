@@ -94,6 +94,26 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-8">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="anggota-bar-chart2" width="auto" height="280"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="anggota-pie-chart2" width="auto" height="280"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
 <!-- Modal -->
