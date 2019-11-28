@@ -73,6 +73,7 @@
 									<thead>
 									<tr>
 										<th>ID Buku</th>
+										<th>Kode Buku</th>
 										<th>Judul</th>
 										<th>Edisi</th>
 										<th>Penerbit</th>
@@ -87,6 +88,7 @@
 									?>
 									<tr>
 										<td><?= $value['buku_id'] ?></td>
+										<td><?= $value['buku_kode'] ?></td>
 										<td><?= $value['buku_judul'] ?></td>
 										<td><?= $value['buku_edisi'] ?></td>
 										<td><?= $value['buku_penerbit'] ?></td>

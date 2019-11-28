@@ -56,6 +56,7 @@
 									<thead>
 									<tr>
 										<th>id_buku</th>
+										<th>kode_buku</th>
 										<th>judul_buku</th>
 									</tr>
 									</thead>
@@ -65,6 +66,7 @@
 										?>
 										<tr>
 											<td><?= $value['id_buku'] ?></td>
+											<td><?= $value['kode_buku'] ?></td>
 											<td><?= $value['judul_buku'] ?></td>
 										</tr>
 									<?php

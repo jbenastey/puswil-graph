@@ -94,7 +94,7 @@ class ProsesController extends CI_Controller
 					if ($numrow > 1) {
 						// Kita push (add) array data ke variabel data
 						array_push($data, array(
-							'buku_id' => $row['A'],
+							'buku_kode' => $row['A'],
 							'buku_judul' => $row['B'],
 							'buku_edisi' => $row['C'],
 							'buku_penerbit' => $row['D'],
@@ -249,6 +249,7 @@ class ProsesController extends CI_Controller
 			foreach ($data['buku'] as $key => $value) {
 				array_push($dataDimensi['buku'], array(
 					'id_buku' => $value['buku_id'],
+					'kode_buku' => $value['buku_kode'],
 					'judul_buku' => $value['buku_judul'],
 				));
 			}
@@ -264,6 +265,7 @@ class ProsesController extends CI_Controller
 			foreach ($data['buku'] as $key => $value) {
 				array_push($dataDimensi['buku'], array(
 					'id_buku' => $value['buku_id'],
+					'kode_buku' => $value['buku_kode'],
 					'judul_buku' => $value['buku_judul'],
 				));
 			}
@@ -431,6 +433,54 @@ class ProsesController extends CI_Controller
 			}elseif ($value['anggota_pelajar_p'] != null){
 				$data['pelajar'] += 1;
 				$data['wanita'] += 1;
+			}
+		}
+		echo json_encode($data);
+	}
+
+	public function grafik_waktu($tahun){
+		$waktu = $this->proses->lihat('dim_waktu');
+		$data = array(
+			'jan' => 0,
+			'feb' => 0,
+			'mar' => 0,
+			'apr' => 0,
+			'mei' => 0,
+			'jun' => 0,
+			'jul' => 0,
+			'agu' => 0,
+			'sep' => 0,
+			'okt' => 0,
+			'nov' => 0,
+			'des' => 0,
+		);
+		foreach ($waktu as $key=>$value) {
+			if ($value['tahun_waktu'] == $tahun){
+				if ($value['bulan_waktu'] == '01'){
+					$data['jan']++;
+				}elseif ($value['bulan_waktu'] == '02'){
+					$data['feb']++;
+				}elseif ($value['bulan_waktu'] == '03'){
+					$data['mar']++;
+				}elseif ($value['bulan_waktu'] == '04'){
+					$data['apr']++;
+				}elseif ($value['bulan_waktu'] == '05'){
+					$data['mei']++;
+				}elseif ($value['bulan_waktu'] == '06'){
+					$data['jun']++;
+				}elseif ($value['bulan_waktu'] == '07'){
+					$data['jul']++;
+				}elseif ($value['bulan_waktu'] == '08'){
+					$data['agu']++;
+				}elseif ($value['bulan_waktu'] == '09'){
+					$data['sep']++;
+				}elseif ($value['bulan_waktu'] == '10'){
+					$data['okt']++;
+				}elseif ($value['bulan_waktu'] == '11'){
+					$data['nov']++;
+				}elseif ($value['bulan_waktu'] == '12'){
+					$data['des']++;
+				}
 			}
 		}
 		echo json_encode($data);

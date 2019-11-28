@@ -236,4 +236,79 @@ $(document).ready(function () {
 			});
 		}
 	})
+	$.ajax({
+		url: root + 'grafik_waktu/2019',
+		type: 'GET',
+		async: true,
+		cache: false,
+		dataType: 'json',
+		success: function (response) {
+			console.log(response);
+			var peminjam_line = $('#peminjam-line-chart');
+			var salesChart = new Chart(peminjam_line, {
+				type: 'line',
+				data: {
+					labels: ["Januari", "Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"],
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"rgba(222,184,135,0.4)",
+							borderColor:
+								"#DEB887",
+							data: [
+								response.jan,
+								response.feb,
+								response.mar,
+								response.apr,
+								response.mei,
+								response.jun,
+								response.jul,
+								response.agu,
+								response.sep,
+								response.okt,
+								response.nov,
+								response.des,
+							]
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Peminjaman Tahun 2019',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						yAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+		}
+	})
 })

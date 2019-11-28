@@ -61,6 +61,7 @@ $route['fakta'] = 'ProsesController/fakta';
 $route['refresh_fakta'] = 'ProsesController/refreshFakta';
 
 $route['grafik_anggota'] = 'ProsesController/grafik_anggota';
+$route['grafik_waktu/(:any)'] = 'ProsesController/grafik_waktu/$1';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
