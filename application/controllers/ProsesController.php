@@ -485,4 +485,12 @@ class ProsesController extends CI_Controller
 		}
 		echo json_encode($data);
 	}
+
+	public function terbanyak(){
+		$data = array(
+			'buku' => $this->proses->buku_terbanyak(),
+			'pinjam' => $this->proses->pinjam_terbanyak(),
+		);
+		echo json_encode($data);
+	}
 }

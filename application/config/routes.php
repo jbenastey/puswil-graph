@@ -59,6 +59,7 @@ $route['dimensi'] = 'ProsesController/dimensi';
 $route['refresh'] = 'ProsesController/refresh';
 $route['fakta'] = 'ProsesController/fakta';
 $route['refresh_fakta'] = 'ProsesController/refreshFakta';
+$route['banyak'] = 'ProsesController/terbanyak';
 
 $route['grafik_anggota'] = 'ProsesController/grafik_anggota';
 $route['grafik_waktu/(:any)'] = 'ProsesController/grafik_waktu/$1';
