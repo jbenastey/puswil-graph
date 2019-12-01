@@ -160,7 +160,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="chart">
-							<canvas id="buku-banyak-chart" width="auto" height="500"></canvas>
+							<canvas id="buku-banyak-chart" height="1000"></canvas>
 						</div>
 					</div>
 				</div>
@@ -169,7 +169,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="chart">
-							<canvas id="pinjam-banyak-chart" width="auto" height="500"></canvas>
+							<canvas id="pinjam-banyak-chart" height="1000"></canvas>
 						</div>
 					</div>
 				</div>
