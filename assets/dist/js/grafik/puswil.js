@@ -235,7 +235,7 @@ $(document).ready(function () {
 				}
 			});
 		}
-	})
+	});
 	$.ajax({
 		url: root + 'grafik_waktu/2019',
 		type: 'GET',
@@ -302,6 +302,139 @@ $(document).ready(function () {
 					},
 					scales: {
 						yAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+		}
+	});
+	$.ajax({
+		url: root + 'banyak',
+		type: 'GET',
+		async: true,
+		cache: false,
+		dataType: 'json',
+		success: function (response) {
+			$('#buku-banyak').html(response.buku[0].buku_judul);
+			$('#pinjam-banyak').html(response.pinjam[0].peminjam_nama);
+
+			var buku = [];
+			var jumlahBuku = [];
+			for (var i = 0; i < response.buku.length; i++) {
+				buku.push(response.buku[i].buku_judul);
+				jumlahBuku.push(response.buku[i].total)
+			}
+
+			var pinjam = [];
+			var jumlahPinjam = [];
+			for (var i = 0; i < response.pinjam.length; i++) {
+				pinjam.push(response.pinjam[i].peminjam_nama);
+				jumlahPinjam.push(response.pinjam[i].total)
+			}
+
+			var buku_chart = $('#buku-banyak-chart');
+			var salesChart = new Chart(buku_chart, {
+				type: 'horizontalBar',
+				data: {
+					labels: buku,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+								jumlahBuku
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Buku Terpinjam',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+
+			var pinjam_chart = $('#pinjam-banyak-chart');
+			var salesChart = new Chart(pinjam_chart, {
+				type: 'horizontalBar',
+				data: {
+					labels: pinjam,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+								jumlahPinjam
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Nama Peminjam',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
 							ticks: {
 								beginAtZero : true
 							}
