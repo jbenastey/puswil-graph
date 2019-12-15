@@ -368,14 +368,21 @@ class ProsesController extends CI_Controller
 		} elseif (count($data) == count($dataDimensi['anggota'])) {
 			$dataFakta = null;
 		} else {
+//			var_dump('asdad');die;
+//			var_dump($dataDimensi);
 			foreach ($data as $key => $value) {
 				if ($value['id_anggota'] == $dataDimensi['anggota'][$key]['id_anggota']) {
-					unset($data[$key]);
+					unset($dataDimensi['anggota'][$key]);
+					unset($dataDimensi['peminjam'][$key]);
+					unset($dataDimensi['pengunjung'][$key]);
+					unset($dataDimensi['buku'][$key]);
+					unset($dataDimensi['waktu'][$key]);
 				}
 			}
+//			var_dump($dataDimensi);
 			foreach ($dataDimensi['anggota'] as $key=>$value) {
 				array_push($dataFakta, array(
-					'id_anggota' => $value['id_anggota'],
+					'id_anggota' => $dataDimensi['anggota'][$key]['id_anggota'],
 					'id_peminjam' => $dataDimensi['peminjam'][$key]['id_peminjam'],
 					'id_pengunjung' => $dataDimensi['pengunjung'][$key]['id_pengunjung'],
 					'id_buku' => $dataDimensi['buku'][$key]['id_buku'],
@@ -386,7 +393,7 @@ class ProsesController extends CI_Controller
 		}
 //		echo "<pre>";
 //		print_r ($dataFakta);
-//		echo "</pre>";
+//		echo "</pre>";die;
 		redirect('fakta');
 	}
 
