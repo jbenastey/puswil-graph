@@ -78,4 +78,20 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get('excel_peminjam');
 		return $query->result_array();
 	}
+	public function anggota_terbanyak()
+	{
+		$this->db->select('anggota_nama, count(anggota_nama) as total');
+		$this->db->group_by('anggota_nama');
+		$this->db->order_by('total','desc');
+		$query = $this->db->get('excel_anggota');
+		return $query->result_array();
+	}
+	public function pengunjung_terbanyak()
+	{
+		$this->db->select('pengunjung_nama, count(pengunjung_nama) as total');
+		$this->db->group_by('pengunjung_nama');
+		$this->db->order_by('total','desc');
+		$query = $this->db->get('excel_pengunjung');
+		return $query->result_array();
+	}
 }

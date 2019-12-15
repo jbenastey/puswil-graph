@@ -236,81 +236,93 @@ $(document).ready(function () {
 			});
 		}
 	});
-	$.ajax({
-		url: root + 'grafik_waktu/2019',
-		type: 'GET',
-		async: true,
-		cache: false,
-		dataType: 'json',
-		success: function (response) {
-			console.log(response);
-			var peminjam_line = $('#peminjam-line-chart');
-			var salesChart = new Chart(peminjam_line, {
-				type: 'line',
-				data: {
-					labels: ["Januari", "Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"],
-					datasets: [
-						{
-							label: 'jumlah',
-							backgroundColor:
-								"rgba(222,184,135,0.4)",
-							borderColor:
-								"#DEB887",
-							data: [
-								response.jan,
-								response.feb,
-								response.mar,
-								response.apr,
-								response.mei,
-								response.jun,
-								response.jul,
-								response.agu,
-								response.sep,
-								response.okt,
-								response.nov,
-								response.des,
-							]
-						}]
-				},
-				options: {
-					onClick: function (event, array) {
-						let element = this.getElementAtEvent(event);
-						if (element.length > 0) {
-							var series = element[0]._model.datasetLabel;
-							var label = element[0]._model.label;
-							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
-							obat_tahun(label);
+
+	var d = new Date();
+	grafik_tahun(d.getFullYear());
+
+	$('#tahun').change(function () {
+		var tahun = $(this).val();
+		grafik_tahun(tahun);
+	});
+
+	function grafik_tahun(tahun){
+		$.ajax({
+			url: root + 'grafik_waktu/'+tahun,
+			type: 'GET',
+			async: true,
+			cache: false,
+			dataType: 'json',
+			success: function (response) {
+				console.log(response);
+				var peminjam_line = $('#peminjam-line-chart');
+				var salesChart = new Chart(peminjam_line, {
+					type: 'line',
+					data: {
+						labels: ["Januari", "Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"],
+						datasets: [
+							{
+								label: 'jumlah',
+								backgroundColor:
+									"rgba(222,184,135,0.4)",
+								borderColor:
+									"#DEB887",
+								data: [
+									response.jan,
+									response.feb,
+									response.mar,
+									response.apr,
+									response.mei,
+									response.jun,
+									response.jul,
+									response.agu,
+									response.sep,
+									response.okt,
+									response.nov,
+									response.des,
+								]
+							}]
+					},
+					options: {
+						onClick: function (event, array) {
+							let element = this.getElementAtEvent(event);
+							if (element.length > 0) {
+								var series = element[0]._model.datasetLabel;
+								var label = element[0]._model.label;
+								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+								obat_tahun(label);
+							}
+						}
+						,
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Jumlah Peminjaman Tahun '+tahun,
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+						scales: {
+							yAxes:[{
+								ticks: {
+									beginAtZero : true
+								}
+							}]
 						}
 					}
-					,
-					maintainAspectRatio: false,
-					tooltips: {
-						mode: mode,
-						intersect: intersect
-					},
-					hover: {
-						mode: mode,
-						intersect: intersect
-					},
-					title: {
-						display: true,
-						text: 'Jumlah Peminjaman Tahun 2019',
-					},
-					legend: {
-						display: true,
-						position: 'bottom',
-					},
-					scales: {
-						yAxes:[{
-							ticks: {
-								beginAtZero : true
-							}
-						}]
-					}
-				}
-			});
-		}
-	});
+				});
+			}
+		});
+	}
+
 	$.ajax({
 		url: root + 'banyak',
 		type: 'GET',
@@ -320,6 +332,8 @@ $(document).ready(function () {
 		success: function (response) {
 			$('#buku-banyak').html(response.buku[0].buku_judul);
 			$('#pinjam-banyak').html(response.pinjam[0].peminjam_nama);
+			$('#anggota-banyak').html(response.anggota[0].anggota_nama);
+			$('#pengunjung-banyak').html(response.pengunjung[0].pengunjung_nama);
 
 			var buku = [];
 			var jumlahBuku = [];
@@ -333,6 +347,20 @@ $(document).ready(function () {
 			for (var i = 0; i < response.pinjam.length; i++) {
 				pinjam.push(response.pinjam[i].peminjam_nama);
 				jumlahPinjam.push(response.pinjam[i].total)
+			}
+
+			var anggota = [];
+			var jumlahAnggota = [];
+			for (var i = 0; i < response.anggota.length; i++) {
+				anggota.push(response.anggota[i].anggota_nama);
+				jumlahAnggota.push(response.anggota[i].total)
+			}
+
+			var pengunjung = [];
+			var jumlahPengunjung = [];
+			for (var i = 0; i < response.pengunjung.length; i++) {
+				pengunjung.push(response.pengunjung[i].pengunjung_nama);
+				jumlahPengunjung.push(response.pengunjung[i].total)
 			}
 
 			var buku_chart = $('#buku-banyak-chart');
@@ -428,6 +456,114 @@ $(document).ready(function () {
 					title: {
 						display: true,
 						text: 'Jumlah Nama Peminjam',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+
+			var anggota_chart = $('#anggota-banyak-chart');
+			var salesChart = new Chart(anggota_chart, {
+				type: 'horizontalBar',
+				data: {
+					labels: pinjam,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+								jumlahAnggota
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Nama Anggota',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						xAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+
+			var pengunjung_chart = $('#pengunjung-banyak-chart');
+			var salesChart = new Chart(pengunjung_chart, {
+				type: 'horizontalBar',
+				data: {
+					labels: pinjam,
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:
+								"#DEB887",
+							borderColor:
+								"#DEB887",
+							data:
+								jumlahPengunjung
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Nama Pengunjung',
 					},
 					legend: {
 						display: true,

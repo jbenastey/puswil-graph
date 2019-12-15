@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6 col-6">
+			<div class="col-lg-3 col-6">
 				<div class="small-box bg-primary-gradient">
 					<div class="inner">
 						<h3>&nbsp;<span id="buku-banyak"></span></h3>
@@ -89,7 +89,7 @@
 							class="fa fa-arrow-circle-down"></i></a>
 				</div>
 			</div>
-			<div class="col-lg-6 col-6">
+			<div class="col-lg-3 col-6">
 				<div class="small-box bg-primary-gradient">
 					<div class="inner">
 						<h3>&nbsp;<span id="pinjam-banyak"></span></h3>
@@ -100,6 +100,34 @@
 						<i class="fa fa-user"></i>
 					</div>
 					<a href="#banyak" class="small-box-footer">Lihat Data <i
+							class="fa fa-arrow-circle-down"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-6">
+				<div class="small-box bg-primary-gradient">
+					<div class="inner">
+						<h3>&nbsp;<span id="anggota-banyak"></span></h3>
+
+						<p>Anggota </p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-user"></i>
+					</div>
+					<a href="#banyak2" class="small-box-footer">Lihat Data <i
+							class="fa fa-arrow-circle-down"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-6">
+				<div class="small-box bg-primary-gradient">
+					<div class="inner">
+						<h3>&nbsp;<span id="pengunjung-banyak"></span></h3>
+
+						<p>Pengunjung </p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-user"></i>
+					</div>
+					<a href="#banyak2" class="small-box-footer">Lihat Data <i
 							class="fa fa-arrow-circle-down"></i></a>
 				</div>
 			</div>
@@ -148,6 +176,21 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
+						<div class="">
+							<select name="" id="tahun" class="form-control">
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+								<option value="2017">2017</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+								<option value="2022">2022</option>
+								<option value="2023">2023</option>
+								<option value="2024">2024</option>
+								<option value="2025">2025</option>
+							</select>
+						</div>
 						<div class="chart">
 							<canvas id="peminjam-line-chart" width="auto" height="280"></canvas>
 						</div>
@@ -170,6 +213,26 @@
 					<div class="card-body">
 						<div class="chart">
 							<canvas id="pinjam-banyak-chart" height="1000"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="banyak2">
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="anggota-banyak-chart" height="1000"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="chart">
+							<canvas id="pengunjung-banyak-chart" height="1000"></canvas>
 						</div>
 					</div>
 				</div>
