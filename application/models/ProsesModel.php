@@ -80,7 +80,7 @@ class ProsesModel extends CI_Model
 	}
 	public function anggota_terbanyak()
 	{
-		$this->db->select('anggota_nama, count(anggota_nama) as total');
+		$this->db->select('*, count(anggota_nama) as total');
 		$this->db->group_by('anggota_nama');
 		$this->db->order_by('total','desc');
 		$query = $this->db->get('excel_anggota');
@@ -88,7 +88,7 @@ class ProsesModel extends CI_Model
 	}
 	public function pengunjung_terbanyak()
 	{
-		$this->db->select('pengunjung_nama, count(pengunjung_nama) as total');
+		$this->db->select('*, count(pengunjung_nama) as total');
 		$this->db->group_by('pengunjung_nama');
 		$this->db->order_by('total','desc');
 		$query = $this->db->get('excel_pengunjung');

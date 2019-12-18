@@ -19,14 +19,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<link rel="icon" href="<?= base_url() ?>assets/image/download.jpg" type="image/x-icon"/>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('<?=base_url('assets/dist/img/16400502962_31bc7c31ae_b.jpg')?>'); background-repeat: no-repeat;background-size:100% auto;">
 <div class="login-box">
-	<div class="login-logo">
-		<a href="<?= base_url() ?>"><b>Sistem Informasi </b>Pustaka Wilayah</a>
-	</div>
 	<!-- /.login-logo -->
 	<div class="card">
 		<div class="card-body login-card-body">
+			<div class="login-logo">
+				<a href="<?= base_url() ?>"><b>Sistem Informasi </b>Pustaka Wilayah</a>
+			</div>
 			<?php if ($this->session->flashdata('alert') == 'gagalLogin') { ?>
 				<div class="alert alert-danger animated fadeInDown" role="alert">
 					<button type="button" class="close" data-dismiss="alert"></button>
