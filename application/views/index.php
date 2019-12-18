@@ -254,7 +254,7 @@
 			<form action="<?= base_url('upload') ?>" method="post" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="form-group">
-						<a href="<?= base_url() . 'excel/format/data.xlsx' ?>" class="btn btn-outline-primary"><i
+						<a href="<?= base_url() . 'excel/formats/data.xlsx' ?>" class="btn btn-outline-primary"><i
 								class="fa fa-download"></i> Download Format</a>
 					</div>
 					<div class="form-group">

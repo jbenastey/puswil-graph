@@ -19,7 +19,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<link rel="icon" href="<?= base_url() ?>assets/image/download.jpg" type="image/x-icon"/>
 </head>
-<body class="hold-transition login-page" style="background-image: url('<?=base_url('assets/dist/img/16400502962_31bc7c31ae_b.jpg')?>'); background-repeat: no-repeat;background-size:100% auto;">
+<body class="hold-transition login-page" style="background-image: url('<?=base_url('assets/dist/img/16400502962_31bc7c31ae_b.jpg')?>'); background-repeat: no-repeat;background-size:100% 850px;">
 <div class="login-box">
 	<!-- /.login-logo -->
 	<div class="card">

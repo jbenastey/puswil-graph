@@ -79,7 +79,6 @@
 										<th>Penerbit</th>
 										<th>Deskripsi Fisik</th>
 										<th>Subjek</th>
-										<th>Eksemplar</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -94,7 +93,6 @@
 										<td><?= $value['buku_penerbit'] ?></td>
 										<td><?= $value['buku_fisik'] ?></td>
 										<td><?= $value['buku_subjek'] ?></td>
-										<td><?= $value['buku_eksemplar'] ?></td>
 									</tr>
 									<?php
 									endforeach;
@@ -104,7 +102,7 @@
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_3">
-								<table class="table table-bordered table-striped table-responsive example1">
+								<table class="table table-bordered table-striped example1 table-responsive" width="100%">
 									<thead class="text-center">
 									<tr>
 										<th rowspan="3">Nama</th>
@@ -120,6 +118,7 @@
 										<th rowspan="3">700</th>
 										<th rowspan="3">800</th>
 										<th rowspan="3">900</th>
+										<th rowspan="3">Waktu</th>
 									</tr>
 									<tr>
 										<th colspan="2">Umum</th>
@@ -158,6 +157,7 @@
 										<td><?= $value['peminjam_klas_700'] ?></td>
 										<td><?= $value['peminjam_klas_800'] ?></td>
 										<td><?= $value['peminjam_klas_900'] ?></td>
+										<td><?= $value['time'] ?></td>
 									</tr>
 									<?php
 									endforeach;
@@ -167,7 +167,7 @@
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_4">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" width="100%">
 									<thead class="text-center">
 									<tr>
 										<th rowspan="3">Nama</th>

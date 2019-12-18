@@ -100,7 +100,6 @@ class ProsesController extends CI_Controller
 							'buku_penerbit' => $row['D'],
 							'buku_fisik' => $row['E'],
 							'buku_subjek' => $row['F'],
-							'buku_eksemplar' => $row['G'],
 						));
 					}
 
@@ -140,6 +139,7 @@ class ProsesController extends CI_Controller
 							'peminjam_klas_700' => $row['P'],
 							'peminjam_klas_800' => $row['Q'],
 							'peminjam_klas_900' => $row['R'],
+							'time' => $row['S'],
 						));
 					}
 
@@ -211,15 +211,8 @@ class ProsesController extends CI_Controller
 					'nama_anggota' => $value['anggota_nama'],
 					'nomor_anggota' => $value['anggota_nomor'],
 				));
-				array_push($dataDimensi['waktu'], array(
-					'waktu' => date('H:i:s'),
-					'hari_waktu' => $this->hari(date('l')),
-					'bulan_waktu' => date('m'),
-					'tahun_waktu' => date('Y'),
-				));
 			}
 			$this->proses->insert_dimensi('dim_anggota', $dataDimensi['anggota']);
-			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
 		} elseif (count($data['anggota']) == count($dimensiLama['anggota'])) {
 			$dataDimensi['anggota'] = null;
 		} else {
@@ -234,15 +227,8 @@ class ProsesController extends CI_Controller
 					'nama_anggota' => $value['anggota_nama'],
 					'nomor_anggota' => $value['anggota_nomor'],
 				));
-				array_push($dataDimensi['waktu'], array(
-					'waktu' => date('H:i:s'),
-					'hari_waktu' => $this->hari(date('l')),
-					'bulan_waktu' => date('m'),
-					'tahun_waktu' => date('Y'),
-				));
 			}
 			$this->proses->insert_dimensi('dim_anggota', $dataDimensi['anggota']);
-			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
 		}
 		//---------------------------------------------------------------------------------
 		if (count($data['buku']) == 0) {
@@ -279,8 +265,17 @@ class ProsesController extends CI_Controller
 					'nama_peminjam' => $value['peminjam_nama'],
 					'nomor_anggota' => $value['peminjam_no_anggota'],
 				));
+				$waktu = $value['time'];
+				$pecah = explode('-',$waktu);
+				array_push($dataDimensi['waktu'], array(
+					'waktu' => date('H:i:s'),
+					'hari_waktu' => $this->hari(date('l')),
+					'bulan_waktu' => $pecah[0],
+					'tahun_waktu' => $pecah[1],
+				));
 			}
 			$this->proses->insert_dimensi('dim_peminjam', $dataDimensi['peminjam']);
+			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
 		} elseif (count($data['peminjam']) == count($dimensiLama['peminjam'])) {
 			$dataDimensi['peminjam'] = null;
 		} else {
@@ -295,8 +290,17 @@ class ProsesController extends CI_Controller
 					'nama_peminjam' => $value['peminjam_nama'],
 					'nomor_anggota' => $value['peminjam_no_anggota'],
 				));
+				$waktu = $value['time'];
+				$pecah = explode('-',$waktu);
+				array_push($dataDimensi['waktu'], array(
+					'waktu' => date('H:i:s'),
+					'hari_waktu' => $this->hari(date('l')),
+					'bulan_waktu' => $pecah[0],
+					'tahun_waktu' => $pecah[1],
+				));
 			}
 			$this->proses->insert_dimensi('dim_peminjam', $dataDimensi['peminjam']);
+			$this->proses->insert_dimensi('dim_waktu', $dataDimensi['waktu']);
 		}
 		//---------------------------------------------------------------------------------
 

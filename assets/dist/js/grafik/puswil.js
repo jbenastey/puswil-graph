@@ -330,7 +330,7 @@ $(document).ready(function () {
 		cache: false,
 		dataType: 'json',
 		success: function (response) {
-			console.log(response.pinjam);
+			console.log(response.anggota[0]);
 			$('#buku-banyak').html(response.buku[0].buku_judul);
 			$('#pinjam-banyak').html(response.pinjam[0].peminjam_nama);
 			$('#anggota-banyak').html(response.anggota[0].anggota_nama);
