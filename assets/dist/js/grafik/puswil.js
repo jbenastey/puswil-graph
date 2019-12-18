@@ -330,6 +330,7 @@ $(document).ready(function () {
 		cache: false,
 		dataType: 'json',
 		success: function (response) {
+			console.log(response.pinjam);
 			$('#buku-banyak').html(response.buku[0].buku_judul);
 			$('#pinjam-banyak').html(response.pinjam[0].peminjam_nama);
 			$('#anggota-banyak').html(response.anggota[0].anggota_nama);
@@ -337,30 +338,58 @@ $(document).ready(function () {
 
 			var buku = [];
 			var jumlahBuku = [];
-			for (var i = 0; i < response.buku.length; i++) {
-				buku.push(response.buku[i].buku_judul);
-				jumlahBuku.push(response.buku[i].total)
+			if (response.buku.length < 10){
+				for (var i = 0; i < response.buku.length; i++) {
+					buku.push(response.buku[i].buku_judul);
+					jumlahBuku.push(response.buku[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					buku.push(response.buku[i].buku_judul);
+					jumlahBuku.push(response.buku[i].total)
+				}
 			}
 
 			var pinjam = [];
 			var jumlahPinjam = [];
-			for (var i = 0; i < response.pinjam.length; i++) {
-				pinjam.push(response.pinjam[i].peminjam_nama);
-				jumlahPinjam.push(response.pinjam[i].total)
+			if (response.pinjam.length < 10){
+				for (var i = 0; i < response.pinjam.length; i++) {
+					pinjam.push(response.pinjam[i].peminjam_nama);
+					jumlahPinjam.push(response.pinjam[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					pinjam.push(response.pinjam[i].peminjam_nama);
+					jumlahPinjam.push(response.pinjam[i].total)
+				}
 			}
 
 			var anggota = [];
 			var jumlahAnggota = [];
-			for (var i = 0; i < response.anggota.length; i++) {
-				anggota.push(response.anggota[i].anggota_nama);
-				jumlahAnggota.push(response.anggota[i].total)
+			if (response.anggota.length < 10){
+				for (var i = 0; i < response.anggota.length; i++) {
+					anggota.push(response.anggota[i].anggota_nama);
+					jumlahAnggota.push(response.anggota[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					anggota.push(response.anggota[i].anggota_nama);
+					jumlahAnggota.push(response.anggota[i].total)
+				}
 			}
 
 			var pengunjung = [];
 			var jumlahPengunjung = [];
-			for (var i = 0; i < response.pengunjung.length; i++) {
-				pengunjung.push(response.pengunjung[i].pengunjung_nama);
-				jumlahPengunjung.push(response.pengunjung[i].total)
+			if (response.pengunjung.length < 10){
+				for (var i = 0; i < response.pengunjung.length; i++) {
+					pengunjung.push(response.pengunjung[i].pengunjung_nama);
+					jumlahPengunjung.push(response.pengunjung[i].total)
+				}
+			} else {
+				for (var i = 0; i < 10; i++) {
+					pengunjung.push(response.pengunjung[i].pengunjung_nama);
+					jumlahPengunjung.push(response.pengunjung[i].total)
+				}
 			}
 
 			var buku_chart = $('#buku-banyak-chart');
