@@ -64,7 +64,7 @@ class ProsesModel extends CI_Model
 
 	public function buku_terbanyak()
 	{
-		$this->db->select('buku_judul, count(buku_judul) as total');
+		$this->db->select('*, count(buku_judul) as total');
 		$this->db->group_by('buku_judul');
 		$this->db->order_by('total','desc');
 		$query = $this->db->get('excel_buku');

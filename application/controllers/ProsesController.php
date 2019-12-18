@@ -449,6 +449,39 @@ class ProsesController extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function grafik_pengunjung(){
+		$pengunjung = $this->proses->lihat('excel_pengunjung');
+		$data = array(
+			'umum' => 0,
+			'mahasiswa' => 0,
+			'pelajar' => 0,
+			'pria' => 0,
+			'wanita' => 0,
+		);
+		foreach ($pengunjung as $key=>$value) {
+			if ($value['pengunjung_umum_l'] != null){
+				$data['umum'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['pengunjung_umum_p'] != null){
+				$data['umum'] += 1;
+				$data['wanita'] += 1;
+			}elseif ($value['pengunjung_mahasiswa_l'] != null){
+				$data['mahasiswa'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['pengunjung_mahasiswa_p'] != null){
+				$data['mahasiswa'] += 1;
+				$data['wanita'] += 1;
+			}elseif ($value['pengunjung_pelajar_l'] != null){
+				$data['pelajar'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['pengunjung_pelajar_p'] != null){
+				$data['pelajar'] += 1;
+				$data['wanita'] += 1;
+			}
+		}
+		echo json_encode($data);
+	}
+
 	public function grafik_waktu($tahun){
 		$waktu = $this->proses->lihat('dim_waktu');
 		$data = array(

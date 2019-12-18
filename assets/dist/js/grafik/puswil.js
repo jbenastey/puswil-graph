@@ -26,10 +26,16 @@ $(document).ready(function () {
 					datasets: [
 						{
 							label: 'jumlah',
-							backgroundColor:
-								"#DEB887",
-							borderColor:
-								"#DEB887",
+							backgroundColor:[
+								"#ffd200",
+								"#00a902",
+								"#DC143C",
+							],
+							borderColor:[
+								"#ffd200",
+								"#00a902",
+								"#DC143C",
+							],
 							data: [
 								response.mahasiswa,
 								response.umum,
@@ -82,12 +88,12 @@ $(document).ready(function () {
 						{
 							label: 'bentuk',
 							backgroundColor: [
-								"#DEB887",
-								"#A9A9A9",
+								"#ffd200",
+								"#00a902",
 								"#DC143C",],
 							borderColor: [
-								"#DEB887",
-								"#A9A9A9",
+								"#ffd200",
+								"#00a902",
 								"#DC143C",],
 							data: [
 								response.mahasiswa,
@@ -136,10 +142,14 @@ $(document).ready(function () {
 					datasets: [
 						{
 							label: 'jumlah',
-							backgroundColor:
-								"#DEB887",
-							borderColor:
-								"#DEB887",
+							backgroundColor:[
+								"#0011de",
+								"#ff00d8",,
+							],
+							borderColor:[
+								"#0011de",
+								"#ff00d8",,
+							],
 							data: [
 								response.pria,
 								response.wanita,]
@@ -191,11 +201,11 @@ $(document).ready(function () {
 						{
 							label: 'bentuk',
 							backgroundColor: [
-								"#DEB887",
-								"#A9A9A9",],
+								"#0011de",
+								"#ff00d8",],
 							borderColor: [
-								"#DEB887",
-								"#A9A9A9",],
+								"#0011de",
+								"#ff00d8",],
 							data: [
 								response.pria,
 								response.wanita,
@@ -227,6 +237,133 @@ $(document).ready(function () {
 					title: {
 						display: true,
 						text: 'Persentasi Anggota Berdasarkan Jenis Kelamin'
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+				}
+			});
+		}
+	});
+
+	$.ajax({
+		url: root + 'grafik_pengunjung',
+		type: 'GET',
+		async: true,
+		cache: false,
+		dataType: 'json',
+		success: function (response) {
+			console.log(response);
+			var anggota_bar = $('#pengunjung-bar-chart');
+			var salesChart = new Chart(anggota_bar, {
+				type: 'bar',
+				data: {
+					labels: ["Mahasiswa", "Umum", "Pelajar"],
+					datasets: [
+						{
+							label: 'jumlah',
+							backgroundColor:[
+								"#ffd200",
+								"#00a902",
+								"#DC143C",
+							],
+							borderColor:[
+								"#ffd200",
+								"#00a902",
+								"#DC143C",
+							],
+							data: [
+								response.mahasiswa,
+								response.umum,
+								response.pelajar,]
+						}]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							obat_tahun(label);
+						}
+					}
+					,
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Jumlah Pengunjung Berdasarkan Kategori',
+					},
+					legend: {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						yAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+			var anggota_pie = $('#pengunjung-pie-chart');
+			var salesChart2 = new Chart(anggota_pie, {
+				type: 'pie',
+				data: {
+					labels: ["Mahasiswa", "Umum", "Pelajar"],
+					datasets: [
+						{
+							label: 'bentuk',
+							backgroundColor: [
+								"#ffd200",
+								"#00a902",
+								"#DC143C",],
+							borderColor: [
+								"#ffd200",
+								"#00a902",
+								"#DC143C",],
+							data: [
+								response.mahasiswa,
+								response.umum,
+								response.pelajar,
+							]
+						}]
+
+				},
+				options: {
+					maintainAspectRatio: false,
+					tooltips: {
+						mode: mode,
+						intersect: intersect,
+						callbacks: {
+							label: function(tooltipItem, data) {
+								var dataset = data.datasets[tooltipItem.datasetIndex];
+								var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+									return previousValue + currentValue;
+								});
+								var currentValue = dataset.data[tooltipItem.index];
+								var percentage = Math.floor(((currentValue/total) * 100)+0.5);
+								return percentage + "%";
+							}
+						}
+					},
+					hover: {
+						mode: mode,
+						intersect: intersect
+					},
+					title: {
+						display: true,
+						text: 'Persentasi Pengunjung Berdasarkan Kategori'
 					},
 					legend: {
 						display: true,
@@ -330,22 +467,56 @@ $(document).ready(function () {
 		cache: false,
 		dataType: 'json',
 		success: function (response) {
-			console.log(response.anggota[0]);
-			$('#buku-banyak').html(response.buku[0].buku_judul);
+			console.log(response.pengunjung[0]);
+			var anggotaBanyak = null;
+			if (response.anggota[0].anggota_umum_l == 1){
+				anggotaBanyak = 'Umum';
+				if (response.anggota[0].anggota_umum_p == 1){
+					anggotaBanyak = 'Umum';
+				}
+			}else if (response.anggota[0].anggota_mahasiswa_l == 1){
+				anggotaBanyak = 'Mahasiswa';
+				if (response.anggota[0].anggota_mahasiswa_p == 1){
+					anggotaBanyak = 'Mahasiswa';
+				}
+			}else if (response.anggota[0].anggota_pelajar_l == 1){
+				anggotaBanyak = 'Pelajar';
+				if (response.anggota[0].anggota_pelajar_p == 1){
+					anggotaBanyak = 'Pelajar';
+				}
+			}
+			var pengunjungBanyak = null;
+			if (response.pengunjung[0].pengunjung_umum_l == 1){
+				pengunjungBanyak = 'Umum';
+				if (response.pengunjung[0].pengunjung_umum_p == 1){
+					pengunjungBanyak = 'Umum';
+				}
+			}else if (response.pengunjung[0].pengunjung_mahasiswa_l == 1){
+				pengunjungBanyak = 'Mahasiswa';
+				if (response.pengunjung[0].pengunjung_mahasiswa_p == 1){
+					pengunjungBanyak = 'Mahasiswa';
+				}
+			}else if (response.pengunjung[0].pengunjung_pelajar_l == 1){
+				pengunjungBanyak = 'Pelajar';
+				if (response.pengunjung[0].pengunjung_pelajar_p == 1){
+					pengunjungBanyak = 'Pelajar';
+				}
+			}
+			$('#buku-banyak').html(response.buku[0].buku_judul +'<br>'+response.buku[0].buku_kode);
 			$('#pinjam-banyak').html(response.pinjam[0].peminjam_nama);
-			$('#anggota-banyak').html(response.anggota[0].anggota_nama);
-			$('#pengunjung-banyak').html(response.pengunjung[0].pengunjung_nama);
+			$('#anggota-banyak').html(anggotaBanyak);
+			$('#pengunjung-banyak').html(pengunjungBanyak);
 
 			var buku = [];
 			var jumlahBuku = [];
 			if (response.buku.length < 10){
 				for (var i = 0; i < response.buku.length; i++) {
-					buku.push(response.buku[i].buku_judul);
+					buku.push(response.buku[i].buku_judul+'/'+response.buku[i].buku_kode);
 					jumlahBuku.push(response.buku[i].total)
 				}
 			} else {
 				for (var i = 0; i < 10; i++) {
-					buku.push(response.buku[i].buku_judul);
+					buku.push(response.buku[i].buku_judul+'/'+response.buku[i].buku_kode);
 					jumlahBuku.push(response.buku[i].total)
 				}
 			}
