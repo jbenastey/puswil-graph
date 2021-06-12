@@ -80,3 +80,11 @@ $route['data-dimensi-buku'] = 'DataController/dimensiBuku';
 $route['data-dimensi-peminjam'] = 'DataController/dimensiPeminjam';
 $route['data-dimensi-pengunjung'] = 'DataController/dimensiPengunjung';
 $route['data-dimensi-waktu'] = 'DataController/dimensiWaktu';
+
+$route['pilih-bulan'] = 'DataController/excelBulan';
+$route['excel-bulan/(:any)'] = 'DataController/lihatExcelPerbulan/$1';
+
+$route['data-excel-bulan-anggota/(:any)'] = 'DataController/excelBulanAnggota/$1';
+$route['data-excel-bulan-buku/(:any)'] = 'DataController/excelBulanBuku/$1';
+$route['data-excel-bulan-peminjam/(:any)'] = 'DataController/excelBulanPeminjam/$1';
+$route['data-excel-bulan-pengunjung/(:any)'] = 'DataController/excelBulanPengunjung/$1';

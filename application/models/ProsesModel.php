@@ -94,4 +94,21 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get('excel_pengunjung');
 		return $query->result_array();
 	}
+
+	public function getHapus(){
+		$this->db->select('bulan_waktu,tahun_waktu');
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('dim_waktu','dim_waktu.id_waktu = fact_peminjaman.id_waktu');
+		$this->db->group_by("bulan_waktu");
+		$this->db->group_by("tahun_waktu");
+		$this->db->order_by("tahun_waktu","asc");
+		$this->db->order_by("bulan_waktu","asc");
+		$this->db->distinct();
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

@@ -130,26 +130,24 @@ class DataController extends CI_Controller
 
 	public function excelBulan(){
 		$data['getHapus'] = $this->proses->getHapus();
-		$this->load->view('template/header');
+		$this->load->view('templates/header');
 		$this->load->view('excel/pilih_bulan',$data);
-		$this->load->view('template/footer');
+		$this->load->view('templates/footer');
 	}
 
 	public function lihatExcelPerbulan($tanggal){
 		$data['bulan'] = $tanggal;
-		$this->load->view('template/header');
+		$this->load->view('templates/header');
 		$this->load->view('excel/index_bulan',$data);
-		$this->load->view('template/footer');
+		$this->load->view('templates/footer');
 	}
 
 	public function excelBulanAnggota($tanggal){
-
 		// POST data
 		$postData = $this->input->post();
-		$bulan = str_replace('-','/',$tanggal);
 
 		// Get data
-		$data = $this->DataModel->getExcelBulanAnggota($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanAnggota($postData,$tanggal);
 
 		echo json_encode($data);
 	}
@@ -157,10 +155,9 @@ class DataController extends CI_Controller
 
 		// POST data
 		$postData = $this->input->post();
-		$bulan = str_replace('-','/',$tanggal);
 
 		// Get data
-		$data = $this->DataModel->getExcelBulanBuku($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanBuku($postData,$tanggal);
 
 		echo json_encode($data);
 	}
@@ -168,10 +165,9 @@ class DataController extends CI_Controller
 
 		// POST data
 		$postData = $this->input->post();
-		$bulan = str_replace('-','/',$tanggal);
 
 		// Get data
-		$data = $this->DataModel->getExcelBulanPeminjam($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanPeminjam($postData,$tanggal);
 
 		echo json_encode($data);
 	}
@@ -179,9 +175,8 @@ class DataController extends CI_Controller
 
 		// POST data
 		$postData = $this->input->post();
-		$bulan = str_replace('-','/',$tanggal);
 		// Get data
-		$data = $this->DataModel->getExcelBulanPengunjung($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanPengunjung($postData,$tanggal);
 
 		echo json_encode($data);
 	}

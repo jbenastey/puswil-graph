@@ -104,63 +104,91 @@ $(document).ready(function(){
 	});
 
 	var tanggal = $('#bulan').text();
+	console.log(tanggal)
 
-	$('#dt-excel-bulan-dokter').DataTable({
+	$('#dt-excel-bulan-anggota').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-bulan-dokter/' + tanggal
+			'url': root + 'data-excel-bulan-anggota/' + tanggal
 		},
 		'columns': [
-			{ data: 'dokter_id' },
-			{ data: 'dokter_nama' },
+			{ data: 'anggota_nama' },
+			{ data: 'anggota_nomor' },
+			{ data: 'anggota_umum_l' },
+			{ data: 'anggota_umum_p' },
+			{ data: 'anggota_mahasiswa_l' },
+			{ data: 'anggota_mahasiswa_p' },
+			{ data: 'anggota_pelajar_l' },
+			{ data: 'anggota_pelajar_p' },
 		]
 	});
 
-	$('#dt-excel-bulan-obat').DataTable({
+	$('#dt-excel-bulan-buku').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-bulan-obat/' + tanggal
+			'url': root + 'data-excel-bulan-buku/' + tanggal
 		},
 		'columns': [
-			{ data: 'obat_id' },
-			{ data: 'obat_kode' },
-			{ data: 'obat_nama' },
-			{ data: 'obat_golongan' },
-			{ data: 'obat_bentuk' },
-			{ data: 'obat_depo' },
-			{ data: 'aksi' },
+			{ data: 'buku_id' },
+			{ data: 'buku_kode' },
+			{ data: 'buku_judul' },
+			{ data: 'buku_edisi' },
+			{ data: 'buku_penerbit' },
+			{ data: 'buku_fisik' },
+			{ data: 'buku_subjek' },
 		]
 	});
 
-	$('#dt-excel-bulan-pasien').DataTable({
+	$('#dt-excel-bulan-peminjam').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-bulan-pasien/' + tanggal
+			'url': root + 'data-excel-bulan-peminjam/' + tanggal
 		},
 		'columns': [
-			{ data: 'pasien_id' },
-			{ data: 'pasien_nama' },
-			{ data: 'pasien_jenis_kelamin' },
-			{ data: 'pasien_umur' },
+			{ data: 'peminjam_nama' },
+			{ data: 'peminjam_no_anggota' },
+			{ data: 'peminjam_umum_l' },
+			{ data: 'peminjam_umum_p' },
+			{ data: 'peminjam_mahasiswa_l' },
+			{ data: 'peminjam_mahasiswa_p' },
+			{ data: 'peminjam_pelajar_l' },
+			{ data: 'peminjam_pelajar_p' },
+			{ data: 'peminjam_klas_000' },
+			{ data: 'peminjam_klas_100' },
+			{ data: 'peminjam_klas_200' },
+			{ data: 'peminjam_klas_300' },
+			{ data: 'peminjam_klas_400' },
+			{ data: 'peminjam_klas_500' },
+			{ data: 'peminjam_klas_600' },
+			{ data: 'peminjam_klas_700' },
+			{ data: 'peminjam_klas_800' },
+			{ data: 'peminjam_klas_900' },
+			{ data: 'time' },
 		]
 	});
 
-	$('#dt-excel-bulan-produsen').DataTable({
+	$('#dt-excel-bulan-pengunjung').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-bulan-produsen/' + tanggal
+			'url': root + 'data-excel-bulan-pengunjung/' + tanggal
 		},
 		'columns': [
-			{ data: 'produsen_id' },
-			{ data: 'produsen_nama' },
+			{ data: 'pengunjung_nama' },
+			{ data: 'pengunjung_nik' },
+			{ data: 'pengunjung_umum_l' },
+			{ data: 'pengunjung_umum_p' },
+			{ data: 'pengunjung_mahasiswa_l' },
+			{ data: 'pengunjung_mahasiswa_p' },
+			{ data: 'pengunjung_pelajar_l' },
+			{ data: 'pengunjung_pelajar_p' },
 		]
 	});
 

@@ -173,7 +173,8 @@ class DataModel extends CI_Model
 			   buku_edisi like'%".$searchValue."%' or
 			    buku_penerbit like'%".$searchValue."%' or
 			    buku_fisik like'%".$searchValue."%' or
-			     buku_subjek like'%".$searchValue."%') ";
+			     buku_subjek like'%".$searchValue."%'
+			     ) ";
 		}
 
 		## Total number of records without filtering
@@ -410,15 +411,24 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (dokter_id like '%".$searchValue."%' or dokter_nama like '%".$searchValue."%') ";
+			$searchQuery = " (
+			anggota_nama like '%".$searchValue."%' or
+			anggota_nomor like '%".$searchValue."%' or
+			anggota_umum_l like '%".$searchValue."%' or
+			anggota_umum_p like '%".$searchValue."%' or
+			anggota_mahasiswa_l like '%".$searchValue."%' or
+			anggota_mahasiswa_p like '%".$searchValue."%' or
+			anggota_pelajar_l like '%".$searchValue."%' or
+			anggota_pelajar_l like '%".$searchValue."%'
+			 ) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 		$totalRecords = $records[0]->allcount;
 
@@ -426,10 +436,10 @@ class DataModel extends CI_Model
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
@@ -439,10 +449,10 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 
 		$data = array();
@@ -450,8 +460,14 @@ class DataModel extends CI_Model
 		foreach($records as $record ){
 
 			$data[] = array(
-				"dokter_id"=>$record->dokter_id,
-				"dokter_nama"=>$record->dokter_nama,
+				"anggota_nama"=>$record->anggota_nama,
+				"anggota_nomor"=>$record->anggota_nomor,
+				"anggota_umum_l"=>$record->anggota_umum_l,
+				"anggota_umum_p"=>$record->anggota_umum_p,
+				"anggota_mahasiswa_l"=>$record->anggota_mahasiswa_l,
+				"anggota_mahasiswa_p"=>$record->anggota_mahasiswa_p,
+				"anggota_pelajar_l"=>$record->anggota_pelajar_l,
+				"anggota_pelajar_p"=>$record->anggota_pelajar_p,
 			);
 		}
 
@@ -482,15 +498,23 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (obat_id like '%".$searchValue."%' or obat_kode like '%".$searchValue."%' or obat_nama like'%".$searchValue."%' or obat_golongan like'%".$searchValue."%' or obat_bentuk like'%".$searchValue."%' or obat_depo like'%".$searchValue."%') ";
+			$searchQuery = " (
+			buku_id like '%".$searchValue."%' or
+			 buku_kode like '%".$searchValue."%' or
+			  buku_judul like'%".$searchValue."%' or
+			   buku_edisi like'%".$searchValue."%' or
+			    buku_penerbit like'%".$searchValue."%' or
+			    buku_fisik like'%".$searchValue."%' or
+			     buku_subjek like'%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_fact');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 		$totalRecords = $records[0]->allcount;
 
@@ -498,10 +522,10 @@ class DataModel extends CI_Model
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_fact');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
@@ -511,10 +535,10 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_fact');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 
 		$data = array();
@@ -523,13 +547,13 @@ class DataModel extends CI_Model
 		foreach($records as $record ){
 
 			$data[] = array(
-				"obat_id"=>$record->obat_id,
-				"obat_kode"=>$record->obat_kode,
-				"obat_nama"=>$record->obat_nama,
-				"obat_golongan"=>$record->obat_golongan,
-				"obat_bentuk"=>$record->obat_bentuk,
-				"obat_depo"=>$record->obat_depo,
-				"aksi"=>'<a href="'.base_url('hapus/'.$bulan.'/'.$record->obat_id).'" class="btn btn-sm btn-danger" title="Hapus Data ?"><i class="fa fa-trash"></i></a>',
+				"buku_id"=>$record->buku_id,
+				"buku_kode"=>$record->buku_kode,
+				"buku_judul"=>$record->buku_judul,
+				"buku_edisi"=>$record->buku_edisi,
+				"buku_penerbit"=>$record->buku_penerbit,
+				"buku_fisik"=>$record->buku_fisik,
+				"buku_subjek"=>$record->buku_subjek,
 			);
 		}
 
@@ -560,15 +584,34 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (pasien_id like '%".$searchValue."%' or pasien_nama like '%".$searchValue."%' or pasien_jenis_kelamin like'%".$searchValue."%' or pasien_umur like'%".$searchValue."%') ";
+			$searchQuery = " (
+			peminjam_nama like '%".$searchValue."%' or 
+			peminjam_no_anggota like '%".$searchValue."%' or 
+			peminjam_umum_l like'%".$searchValue."%' or 
+			peminjam_umum_p like'%".$searchValue."%'
+			peminjam_mahasiswa_l like'%".$searchValue."%'
+			peminjam_mahasiswa_p like'%".$searchValue."%'
+			peminjam_pelajar_l like'%".$searchValue."%'
+			peminjam_pelajar_p like'%".$searchValue."%'
+			peminjam_klas_000 like'%".$searchValue."%'
+			peminjam_klas_100 like'%".$searchValue."%'
+			peminjam_klas_200 like'%".$searchValue."%'
+			peminjam_klas_300 like'%".$searchValue."%'
+			peminjam_klas_400 like'%".$searchValue."%'
+			peminjam_klas_500 like'%".$searchValue."%'
+			peminjam_klas_600 like'%".$searchValue."%'
+			peminjam_klas_700 like'%".$searchValue."%'
+			peminjam_klas_800 like'%".$searchValue."%'
+			peminjam_klas_900 like'%".$searchValue."%'
+			time like'%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_fact');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 		$totalRecords = $records[0]->allcount;
 
@@ -576,10 +619,9 @@ class DataModel extends CI_Model
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_fact');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
@@ -589,10 +631,9 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_fact');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 
 		$data = array();
@@ -600,10 +641,25 @@ class DataModel extends CI_Model
 		foreach($records as $record ){
 
 			$data[] = array(
-				"pasien_id"=>$record->pasien_id,
-				"pasien_nama"=>$record->pasien_nama,
-				"pasien_jenis_kelamin"=>$record->pasien_jenis_kelamin,
-				"pasien_umur"=>$record->pasien_umur,
+				"peminjam_nama"=>$record->peminjam_nama,
+				"peminjam_no_anggota"=>$record->peminjam_no_anggota,
+				"peminjam_umum_l"=>$record->peminjam_umum_l,
+				"peminjam_umum_p"=>$record->peminjam_umum_p,
+				"peminjam_mahasiswa_l"=>$record->peminjam_mahasiswa_l,
+				"peminjam_mahasiswa_p"=>$record->peminjam_mahasiswa_p,
+				"peminjam_pelajar_l"=>$record->peminjam_pelajar_l,
+				"peminjam_pelajar_p"=>$record->peminjam_pelajar_p,
+				"peminjam_klas_000"=>$record->peminjam_klas_000,
+				"peminjam_klas_100"=>$record->peminjam_klas_100,
+				"peminjam_klas_200"=>$record->peminjam_klas_200,
+				"peminjam_klas_300"=>$record->peminjam_klas_300,
+				"peminjam_klas_400"=>$record->peminjam_klas_400,
+				"peminjam_klas_500"=>$record->peminjam_klas_500,
+				"peminjam_klas_600"=>$record->peminjam_klas_600,
+				"peminjam_klas_700"=>$record->peminjam_klas_700,
+				"peminjam_klas_800"=>$record->peminjam_klas_800,
+				"peminjam_klas_900"=>$record->peminjam_klas_900,
+				"time"=>$record->time,
 			);
 		}
 
@@ -634,22 +690,35 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (produsen_id like '%".$searchValue."%' or produsen_nama like '%".$searchValue."%') ";
+			$searchQuery = " (
+			pengunjung_nama like '%".$searchValue."%' or 
+			pengunjung_nik like '%".$searchValue."%' or 
+			pengunjung_umum_l like '%".$searchValue."%' or 
+			pengunjung_umum_p like '%".$searchValue."%' or 
+			pengunjung_mahasiswa_l like '%".$searchValue."%' or 
+			pengunjung_mahasiswa_p like '%".$searchValue."%' or 
+			pengunjung_pelajar_l like '%".$searchValue."%' or 
+			pengunjung_pelajar_p like '%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('excel_produsen')->result();
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_fact');
+		$this->db->like('time',$tanggal);
+		$records = $this->db->get()->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
@@ -659,10 +728,10 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->like('time',$tanggal);
 		$records = $this->db->get()->result();
 
 		$data = array();
@@ -670,8 +739,14 @@ class DataModel extends CI_Model
 		foreach($records as $record ){
 
 			$data[] = array(
-				"produsen_id"=>$record->produsen_id,
-				"produsen_nama"=>$record->produsen_nama,
+				"pengunjung_nama"=>$record->pengunjung_nama,
+				"pengunjung_nik"=>$record->pengunjung_nik,
+				"pengunjung_umum_l"=>$record->pengunjung_umum_l,
+				"pengunjung_umum_p"=>$record->pengunjung_umum_p,
+				"pengunjung_mahasiswa_l"=>$record->pengunjung_mahasiswa_l,
+				"pengunjung_mahasiswa_p"=>$record->pengunjung_mahasiswa_p,
+				"pengunjung_pelajar_l"=>$record->pengunjung_pelajar_l,
+				"pengunjung_pelajar_p"=>$record->pengunjung_pelajar_p,
 			);
 		}
 
