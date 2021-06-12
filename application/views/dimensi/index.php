@@ -27,7 +27,7 @@
 					<div class="card-body">
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" id="dt-dimensi-anggota" style="width: 100%">
 									<thead class="text-center">
 									<tr>
 										<th>id_anggota</th>
@@ -35,24 +35,11 @@
 										<th>nomor_anggota</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($anggota as $key=>$value):
-									?>
-									<tr>
-										<td><?= $value['id_anggota'] ?></td>
-										<td><?= $value['nama_anggota'] ?></td>
-										<td><?= $value['nomor_anggota'] ?></td>
-									</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_2">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" id="dt-dimensi-buku" style="width: 100%">
 									<thead>
 									<tr>
 										<th>id_buku</th>
@@ -60,24 +47,11 @@
 										<th>judul_buku</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($buku as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['id_buku'] ?></td>
-											<td><?= $value['kode_buku'] ?></td>
-											<td><?= $value['judul_buku'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_3">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" id="dt-dimensi-peminjam" style="width: 100%">
 									<thead class="text-center">
 									<tr>
 										<th>id_peminjam</th>
@@ -85,24 +59,11 @@
 										<th>nomor_anggota</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($peminjam as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['id_peminjam'] ?></td>
-											<td><?= $value['nama_peminjam'] ?></td>
-											<td><?= $value['nomor_anggota'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_4">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" id="dt-dimensi-pengunjung" style="width: 100%">
 									<thead class="text-center">
 									<tr>
 										<th>id_pengunjung</th>
@@ -110,24 +71,11 @@
 										<th>nik_pengunjung</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($pengunjung as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['id_pengunjung'] ?></td>
-											<td><?= $value['nama_pengunjung'] ?></td>
-											<td><?= $value['nik_pengunjung'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_5">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" id="dt-dimensi-waktu" style="width: 100%">
 									<thead class="text-center">
 									<tr>
 										<th>id_waktu</th>
@@ -137,21 +85,6 @@
 										<th>tahun_waktu</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($waktu as $key=>$value):
-										?>
-										<tr>
-											<td><?= $value['id_waktu'] ?></td>
-											<td><?= $value['waktu'] ?></td>
-											<td><?= $value['hari_waktu'] ?></td>
-											<td><?= $value['bulan_waktu'] ?></td>
-											<td><?= $value['tahun_waktu'] ?></td>
-										</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->

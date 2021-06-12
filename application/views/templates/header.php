@@ -15,15 +15,6 @@
 	<!-- iCheck -->
 	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/iCheck/flat/blue.css">
 	<!-- Morris chart -->
-	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/morris/morris.css">
-	<!-- jvectormap -->
-	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-	<!-- Date Picker -->
-	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/datepicker/datepicker3.css">
-	<!-- Daterange picker -->
-	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/daterangepicker/daterangepicker-bs3.css">
-	<!-- bootstrap wysihtml5 - text editor -->
-	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/datatables/dataTables.bootstrap4.min.css">
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -87,11 +78,28 @@
 							<p class="text">Beranda</p>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a href="<?=base_url('mentah')?>" class="nav-link <?php if ($this->uri->segment(1) == 'mentah') echo 'active'?>">
+					<li class="nav-item has-treeview <?php if ($this->uri->segment('1') == 'mentah') echo 'menu-open'?>">
+						<a href="#" class="nav-link">
 							<i class="nav-icon fa fa-file-excel-o"></i>
-							<p class="text">Data Excel</p>
+							<p>
+								Data Excel
+								<i class="right fa fa-angle-left"></i>
+							</p>
 						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="<?=base_url('mentah')?>" class="nav-link <?php if ($this->uri->segment('1') == 'mentah') echo 'active'?>">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>Semua Data</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?=base_url('pilih-bulan')?>" class="nav-link">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>Data Perbulan</p>
+								</a>
+							</li>
+						</ul>
 					</li>
 					<li class="nav-item">
 						<a href="<?=base_url('dimensi')?>" class="nav-link <?php if ($this->uri->segment('1') == 'dimensi') echo 'active'?>">
@@ -103,6 +111,35 @@
 						<a href="<?=base_url('fakta')?>" class="nav-link <?php if ($this->uri->segment('1') == 'fakta') echo 'active'?>">
 							<i class="nav-icon fa fa-file"></i>
 							<p>Tabel Fakta</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fa fa-files-o"></i>
+							<p>
+								Laporan
+								<i class="right fa fa-angle-left"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="<?=base_url('laporan')?>" class="nav-link <?php if ($this->uri->segment('1') == 'laporan') echo 'active'?>">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>Semua Data</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?=base_url('pilih-laporan-bulan')?>" class="nav-link">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>Data Perbulan</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a href="<?=base_url('grafik')?>" class="nav-link <?php if ($this->uri->segment('1') == 'grafik') echo 'active'?>">
+							<i class="nav-icon fa fa-bar-chart"></i>
+							<p>Grafik</p>
 						</a>
 					</li>
 				</ul>

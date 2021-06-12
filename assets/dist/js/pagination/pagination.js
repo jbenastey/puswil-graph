@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var root = window.location.origin + '/dashboardapotik/';
+	var root = window.location.origin + '/puswil-graph/';
 
 	$('#dt-fakta').DataTable({
 		'processing': true,
@@ -9,102 +9,97 @@ $(document).ready(function(){
 			'url': root + 'data-fakta'
 		},
 		'columns': [
-			{ data: 'id_obat' },
-			{ data: 'id_produsen' },
-			{ data: 'id_ruang' },
-			{ data: 'id_pasien' },
-			{ data: 'id_dokter' },
-			{ data: 'id_transaksi' },
+			{ data: 'id_anggota' },
+			{ data: 'id_peminjam' },
+			{ data: 'id_pengunjung' },
+			{ data: 'id_buku' },
 			{ data: 'id_waktu' },
 		]
 	});
 
-	$('#dt-excel-dokter').DataTable({
+	$('#dt-excel-anggota').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-dokter'
+			'url': root + 'data-excel-anggota'
 		},
 		'columns': [
-			{ data: 'dokter_id' },
-			{ data: 'dokter_nama' },
+			{ data: 'anggota_nama' },
+			{ data: 'anggota_nomor' },
+			{ data: 'anggota_umum_l' },
+			{ data: 'anggota_umum_p' },
+			{ data: 'anggota_mahasiswa_l' },
+			{ data: 'anggota_mahasiswa_p' },
+			{ data: 'anggota_pelajar_l' },
+			{ data: 'anggota_pelajar_p' },
 		]
 	});
 
-	$('#dt-excel-obat').DataTable({
+	$('#dt-excel-buku').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-obat'
+			'url': root + 'data-excel-buku'
 		},
 		'columns': [
-			{ data: 'obat_id' },
-			{ data: 'obat_kode' },
-			{ data: 'obat_nama' },
-			{ data: 'obat_golongan' },
-			{ data: 'obat_bentuk' },
-			{ data: 'obat_depo' },
+			{ data: 'buku_id' },
+			{ data: 'buku_kode' },
+			{ data: 'buku_judul' },
+			{ data: 'buku_edisi' },
+			{ data: 'buku_penerbit' },
+			{ data: 'buku_fisik' },
+			{ data: 'buku_subjek' },
 		]
 	});
 
-	$('#dt-excel-pasien').DataTable({
+	$('#dt-excel-peminjam').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-pasien'
+			'url': root + 'data-excel-peminjam'
 		},
 		'columns': [
-			{ data: 'pasien_id' },
-			{ data: 'pasien_nama' },
-			{ data: 'pasien_jenis_kelamin' },
-			{ data: 'pasien_umur' },
+			{ data: 'peminjam_nama' },
+			{ data: 'peminjam_no_anggota' },
+			{ data: 'peminjam_umum_l' },
+			{ data: 'peminjam_umum_p' },
+			{ data: 'peminjam_mahasiswa_l' },
+			{ data: 'peminjam_mahasiswa_p' },
+			{ data: 'peminjam_pelajar_l' },
+			{ data: 'peminjam_pelajar_p' },
+			{ data: 'peminjam_klas_000' },
+			{ data: 'peminjam_klas_100' },
+			{ data: 'peminjam_klas_200' },
+			{ data: 'peminjam_klas_300' },
+			{ data: 'peminjam_klas_400' },
+			{ data: 'peminjam_klas_500' },
+			{ data: 'peminjam_klas_600' },
+			{ data: 'peminjam_klas_700' },
+			{ data: 'peminjam_klas_800' },
+			{ data: 'peminjam_klas_900' },
+			{ data: 'time' },
 		]
 	});
 
-	$('#dt-excel-produsen').DataTable({
+	$('#dt-excel-pengunjung').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-produsen'
+			'url': root + 'data-excel-pengunjung'
 		},
 		'columns': [
-			{ data: 'produsen_id' },
-			{ data: 'produsen_nama' },
-		]
-	});
-
-	$('#dt-excel-ruang').DataTable({
-		'processing': true,
-		'serverSide': true,
-		'serverMethod': 'post',
-		'ajax': {
-			'url': root + 'data-excel-ruang'
-		},
-		'columns': [
-			{ data: 'ruang_id' },
-			{ data: 'ruang_poliklinik' },
-			{ data: 'ruang_jenis_masuk' },
-		]
-	});
-
-	$('#dt-excel-transaksi').DataTable({
-		'processing': true,
-		'serverSide': true,
-		'serverMethod': 'post',
-		'ajax': {
-			'url': root + 'data-excel-transaksi'
-		},
-		'columns': [
-			{ data: 'transaksi_id' },
-			{ data: 'transaksi_kelompok' },
-			{ data: 'transaksi_harga' },
-			{ data: 'transaksi_jumlah' },
-			{ data: 'transaksi_cara_bayar' },
-			{ data: 'transaksi_tanggal' },
+			{ data: 'pengunjung_nama' },
+			{ data: 'pengunjung_nik' },
+			{ data: 'pengunjung_umum_l' },
+			{ data: 'pengunjung_umum_p' },
+			{ data: 'pengunjung_mahasiswa_l' },
+			{ data: 'pengunjung_mahasiswa_p' },
+			{ data: 'pengunjung_pelajar_l' },
+			{ data: 'pengunjung_pelajar_p' },
 		]
 	});
 
@@ -169,114 +164,59 @@ $(document).ready(function(){
 		]
 	});
 
-	$('#dt-excel-bulan-ruang').DataTable({
+	$('#dt-dimensi-anggota').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-bulan-ruang/' + tanggal
+			'url': root + 'data-dimensi-anggota'
 		},
 		'columns': [
-			{ data: 'ruang_id' },
-			{ data: 'ruang_poliklinik' },
-			{ data: 'ruang_jenis_masuk' },
+			{ data: 'id_anggota' },
+			{ data: 'nama_anggota' },
+			{ data: 'nomor_anggota' },
 		]
 	});
 
-	$('#dt-excel-bulan-transaksi').DataTable({
+	$('#dt-dimensi-buku').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-excel-bulan-transaksi/' + tanggal
+			'url': root + 'data-dimensi-buku'
 		},
 		'columns': [
-			{ data: 'transaksi_id' },
-			{ data: 'transaksi_kelompok' },
-			{ data: 'transaksi_harga' },
-			{ data: 'transaksi_jumlah' },
-			{ data: 'transaksi_cara_bayar' },
-			{ data: 'transaksi_tanggal' },
+			{ data: 'id_buku' },
+			{ data: 'kode_buku' },
+			{ data: 'judul_buku' },
 		]
 	});
 
-	$('#dt-dimensi-dokter').DataTable({
+	$('#dt-dimensi-peminjam').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-dimensi-dokter'
+			'url': root + 'data-dimensi-peminjam'
 		},
 		'columns': [
-			{ data: 'dokter_id' },
-			{ data: 'dokter_nama' },
+			{ data: 'id_peminjam' },
+			{ data: 'nama_peminjam' },
+			{ data: 'nomor_anggota' },
 		]
 	});
 
-	$('#dt-dimensi-obat').DataTable({
+	$('#dt-dimensi-pengunjung').DataTable({
 		'processing': true,
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': {
-			'url': root + 'data-dimensi-obat'
+			'url': root + 'data-dimensi-pengunjung'
 		},
 		'columns': [
-			{ data: 'obat_id' },
-			{ data: 'obat_nama' },
-		]
-	});
-
-	$('#dt-dimensi-pasien').DataTable({
-		'processing': true,
-		'serverSide': true,
-		'serverMethod': 'post',
-		'ajax': {
-			'url': root + 'data-dimensi-pasien'
-		},
-		'columns': [
-			{ data: 'pasien_id' },
-			{ data: 'pasien_nama' },
-		]
-	});
-
-	$('#dt-dimensi-produsen').DataTable({
-		'processing': true,
-		'serverSide': true,
-		'serverMethod': 'post',
-		'ajax': {
-			'url': root + 'data-dimensi-produsen'
-		},
-		'columns': [
-			{ data: 'produsen_id' },
-			{ data: 'produsen_nama' },
-		]
-	});
-
-	$('#dt-dimensi-ruang').DataTable({
-		'processing': true,
-		'serverSide': true,
-		'serverMethod': 'post',
-		'ajax': {
-			'url': root + 'data-dimensi-ruang'
-		},
-		'columns': [
-			{ data: 'ruang_id' },
-			{ data: 'ruang_poliklinik' },
-		]
-	});
-
-	$('#dt-dimensi-transaksi').DataTable({
-		'processing': true,
-		'serverSide': true,
-		'serverMethod': 'post',
-		'ajax': {
-			'url': root + 'data-dimensi-transaksi'
-		},
-		'columns': [
-			{ data: 'transaksi_id' },
-			{ data: 'transaksi_harga' },
-			{ data: 'transaksi_jumlah' },
-			{ data: 'transaksi_total' },
+			{ data: 'id_pengunjung' },
+			{ data: 'nama_pengunjung' },
+			{ data: 'nik_pengunjung' },
 		]
 	});
 
@@ -288,11 +228,11 @@ $(document).ready(function(){
 			'url': root + 'data-dimensi-waktu'
 		},
 		'columns': [
-			{ data: 'waktu_id' },
-			{ data: 'waktu_hari' },
-			{ data: 'waktu_tanggal' },
-			{ data: 'waktu_bulan' },
-			{ data: 'waktu_tahun' },
+			{ data: 'id_waktu' },
+			{ data: 'waktu' },
+			{ data: 'hari_waktu' },
+			{ data: 'bulan_waktu' },
+			{ data: 'tahun_waktu' },
 		]
 	});
 

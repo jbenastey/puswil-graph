@@ -25,19 +25,19 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (id_fact like '%".$searchValue."%' or id_dokter like '%".$searchValue."%' or id_obat like'%".$searchValue."%' or id_pasien like'%".$searchValue."%' or id_produsen like'%".$searchValue."%' or id_ruang like'%".$searchValue."%' or id_transaksi like'%".$searchValue."%' or id_waktu like'%".$searchValue."%' ) ";
+			$searchQuery = " (id_fact like '%".$searchValue."%' or id_anggota like '%".$searchValue."%' or id_peminjam like'%".$searchValue."%' or id_pengunjung like'%".$searchValue."%' or id_buku like'%".$searchValue."%' or id_waktu like'%".$searchValue."%' ) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('fact_penjualan')->result();
+		$records = $this->db->get('fact_peminjaman')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('fact_penjualan')->result();
+		$records = $this->db->get('fact_peminjaman')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -46,7 +46,7 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('fact_penjualan')->result();
+		$records = $this->db->get('fact_peminjaman')->result();
 
 		$data = array();
 
@@ -54,12 +54,10 @@ class DataModel extends CI_Model
 
 			$data[] = array(
 				"id_fact"=>$record->id_fact,
-				"id_dokter"=>$record->id_dokter,
-				"id_obat"=>$record->id_obat,
-				"id_pasien"=>$record->id_pasien,
-				"id_produsen"=>$record->id_produsen,
-				"id_ruang"=>$record->id_ruang,
-				"id_transaksi"=>$record->id_transaksi,
+				"id_anggota"=>$record->id_anggota,
+				"id_peminjam"=>$record->id_peminjam,
+				"id_pengunjung"=>$record->id_pengunjung,
+				"id_buku"=>$record->id_buku,
 				"id_waktu"=>$record->id_waktu
 			);
 		}
@@ -75,7 +73,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelDokter($postData=null){
+	function getExcelAnggota($postData=null){
 
 		$response = array();
 
@@ -91,19 +89,29 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (dokter_id like '%".$searchValue."%' or dokter_nama like '%".$searchValue."%') ";
+			$searchQuery = " (
+			anggota_id like '%".$searchValue."%' or 
+			anggota_nama like '%".$searchValue."%' or
+			anggota_nomor like '%".$searchValue."%' or
+			anggota_umum_l like '%".$searchValue."%' or
+			anggota_umum_p like '%".$searchValue."%' or
+			anggota_mahasiswa_l like '%".$searchValue."%' or
+			anggota_mahasiswa_p like '%".$searchValue."%' or
+			anggota_pelajar_l like '%".$searchValue."%' or
+			anggota_pelajar_l like '%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('excel_dokter')->result();
+		$records = $this->db->get('excel_anggota')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('excel_dokter')->result();
+		$records = $this->db->get('excel_anggota')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -112,15 +120,22 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('excel_dokter')->result();
+		$records = $this->db->get('excel_anggota')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"dokter_id"=>$record->dokter_id,
-				"dokter_nama"=>$record->dokter_nama,
+				"anggota_id"=>$record->anggota_id,
+				"anggota_nama"=>$record->anggota_nama,
+				"anggota_nomor"=>$record->anggota_nomor,
+				"anggota_umum_l"=>$record->anggota_umum_l,
+				"anggota_umum_p"=>$record->anggota_umum_p,
+				"anggota_mahasiswa_l"=>$record->anggota_mahasiswa_l,
+				"anggota_mahasiswa_p"=>$record->anggota_mahasiswa_p,
+				"anggota_pelajar_l"=>$record->anggota_pelajar_l,
+				"anggota_pelajar_p"=>$record->anggota_pelajar_p,
 			);
 		}
 
@@ -135,7 +150,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelObat($postData=null){
+	function getExcelBuku($postData=null){
 
 		$response = array();
 
@@ -151,19 +166,26 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (obat_id like '%".$searchValue."%' or obat_kode like '%".$searchValue."%' or obat_nama like'%".$searchValue."%' or obat_golongan like'%".$searchValue."%' or obat_bentuk like'%".$searchValue."%' or obat_depo like'%".$searchValue."%') ";
+			$searchQuery = " (
+			buku_id like '%".$searchValue."%' or
+			 buku_kode like '%".$searchValue."%' or
+			  buku_judul like'%".$searchValue."%' or
+			   buku_edisi like'%".$searchValue."%' or
+			    buku_penerbit like'%".$searchValue."%' or
+			    buku_fisik like'%".$searchValue."%' or
+			     buku_subjek like'%".$searchValue."%') ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('excel_obat')->result();
+		$records = $this->db->get('excel_buku')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('excel_obat')->result();
+		$records = $this->db->get('excel_buku')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -172,19 +194,20 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('excel_obat')->result();
+		$records = $this->db->get('excel_buku')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"obat_id"=>$record->obat_id,
-				"obat_kode"=>$record->obat_kode,
-				"obat_nama"=>$record->obat_nama,
-				"obat_golongan"=>$record->obat_golongan,
-				"obat_bentuk"=>$record->obat_bentuk,
-				"obat_depo"=>$record->obat_depo,
+				"buku_id"=>$record->buku_id,
+				"buku_kode"=>$record->buku_kode,
+				"buku_judul"=>$record->buku_judul,
+				"buku_edisi"=>$record->buku_edisi,
+				"buku_penerbit"=>$record->buku_penerbit,
+				"buku_fisik"=>$record->buku_fisik,
+				"buku_subjek"=>$record->buku_subjek,
 			);
 		}
 
@@ -199,7 +222,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelPasien($postData=null){
+	function getExcelPeminjam($postData=null){
 
 		$response = array();
 
@@ -215,19 +238,39 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (pasien_id like '%".$searchValue."%' or pasien_nama like '%".$searchValue."%' or pasien_jenis_kelamin like'%".$searchValue."%' or pasien_umur like'%".$searchValue."%') ";
+			$searchQuery = " (
+			peminjam_nama like '%".$searchValue."%' or 
+			peminjam_no_anggota like '%".$searchValue."%' or 
+			peminjam_umum_l like'%".$searchValue."%' or 
+			peminjam_umum_p like'%".$searchValue."%'
+			peminjam_mahasiswa_l like'%".$searchValue."%'
+			peminjam_mahasiswa_p like'%".$searchValue."%'
+			peminjam_pelajar_l like'%".$searchValue."%'
+			peminjam_pelajar_p like'%".$searchValue."%'
+			peminjam_klas_000 like'%".$searchValue."%'
+			peminjam_klas_100 like'%".$searchValue."%'
+			peminjam_klas_200 like'%".$searchValue."%'
+			peminjam_klas_300 like'%".$searchValue."%'
+			peminjam_klas_400 like'%".$searchValue."%'
+			peminjam_klas_500 like'%".$searchValue."%'
+			peminjam_klas_600 like'%".$searchValue."%'
+			peminjam_klas_700 like'%".$searchValue."%'
+			peminjam_klas_800 like'%".$searchValue."%'
+			peminjam_klas_900 like'%".$searchValue."%'
+			time like'%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('excel_pasien')->result();
+		$records = $this->db->get('excel_peminjam')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('excel_pasien')->result();
+		$records = $this->db->get('excel_peminjam')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -236,17 +279,32 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('excel_pasien')->result();
+		$records = $this->db->get('excel_peminjam')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"pasien_id"=>$record->pasien_id,
-				"pasien_nama"=>$record->pasien_nama,
-				"pasien_jenis_kelamin"=>$record->pasien_jenis_kelamin,
-				"pasien_umur"=>$record->pasien_umur,
+				"peminjam_nama"=>$record->peminjam_nama,
+				"peminjam_no_anggota"=>$record->peminjam_no_anggota,
+				"peminjam_umum_l"=>$record->peminjam_umum_l,
+				"peminjam_umum_p"=>$record->peminjam_umum_p,
+				"peminjam_mahasiswa_l"=>$record->peminjam_mahasiswa_l,
+				"peminjam_mahasiswa_p"=>$record->peminjam_mahasiswa_p,
+				"peminjam_pelajar_l"=>$record->peminjam_pelajar_l,
+				"peminjam_pelajar_p"=>$record->peminjam_pelajar_p,
+				"peminjam_klas_000"=>$record->peminjam_klas_000,
+				"peminjam_klas_100"=>$record->peminjam_klas_100,
+				"peminjam_klas_200"=>$record->peminjam_klas_200,
+				"peminjam_klas_300"=>$record->peminjam_klas_300,
+				"peminjam_klas_400"=>$record->peminjam_klas_400,
+				"peminjam_klas_500"=>$record->peminjam_klas_500,
+				"peminjam_klas_600"=>$record->peminjam_klas_600,
+				"peminjam_klas_700"=>$record->peminjam_klas_700,
+				"peminjam_klas_800"=>$record->peminjam_klas_800,
+				"peminjam_klas_900"=>$record->peminjam_klas_900,
+				"time"=>$record->time,
 			);
 		}
 
@@ -261,7 +319,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelProdusen($postData=null){
+	function getExcelPengunjung($postData=null){
 
 		$response = array();
 
@@ -277,19 +335,28 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (produsen_id like '%".$searchValue."%' or produsen_nama like '%".$searchValue."%') ";
+			$searchQuery = " (
+			pengunjung_nama like '%".$searchValue."%' or 
+			pengunjung_nik like '%".$searchValue."%' or 
+			pengunjung_umum_l like '%".$searchValue."%' or 
+			pengunjung_umum_p like '%".$searchValue."%' or 
+			pengunjung_mahasiswa_l like '%".$searchValue."%' or 
+			pengunjung_mahasiswa_p like '%".$searchValue."%' or 
+			pengunjung_pelajar_l like '%".$searchValue."%' or 
+			pengunjung_pelajar_p like '%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('excel_produsen')->result();
+		$records = $this->db->get('excel_pengunjung')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('excel_produsen')->result();
+		$records = $this->db->get('excel_pengunjung')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -298,15 +365,21 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('excel_produsen')->result();
+		$records = $this->db->get('excel_pengunjung')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"produsen_id"=>$record->produsen_id,
-				"produsen_nama"=>$record->produsen_nama,
+				"pengunjung_nama"=>$record->pengunjung_nama,
+				"pengunjung_nik"=>$record->pengunjung_nik,
+				"pengunjung_umum_l"=>$record->pengunjung_umum_l,
+				"pengunjung_umum_p"=>$record->pengunjung_umum_p,
+				"pengunjung_mahasiswa_l"=>$record->pengunjung_mahasiswa_l,
+				"pengunjung_mahasiswa_p"=>$record->pengunjung_mahasiswa_p,
+				"pengunjung_pelajar_l"=>$record->pengunjung_pelajar_l,
+				"pengunjung_pelajar_p"=>$record->pengunjung_pelajar_p,
 			);
 		}
 
@@ -321,132 +394,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelRuang($postData=null){
-
-		$response = array();
-
-		## Read value
-		$draw = $postData['draw'];
-		$start = $postData['start'];
-		$rowperpage = $postData['length']; // Rows display per page
-		$columnIndex = $postData['order'][0]['column']; // Column index
-		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
-		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
-		$searchValue = $postData['search']['value']; // Search value
-
-		## Search
-		$searchQuery = "";
-		if($searchValue != ''){
-			$searchQuery = " (ruang_id like '%".$searchValue."%' or ruang_poliklinik like '%".$searchValue."%' or ruang_jenis_masuk like'%".$searchValue."%') ";
-		}
-
-		## Total number of records without filtering
-		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('excel_ruang')->result();
-		$totalRecords = $records[0]->allcount;
-
-		## Total number of record with filtering
-		$this->db->select('count(*) as allcount');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$records = $this->db->get('excel_ruang')->result();
-		$totalRecordwithFilter = $records[0]->allcount;
-
-		## Fetch records
-		$this->db->select('*');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$this->db->order_by($columnName, $columnSortOrder);
-		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('excel_ruang')->result();
-
-		$data = array();
-
-		foreach($records as $record ){
-
-			$data[] = array(
-				"ruang_id"=>$record->ruang_id,
-				"ruang_poliklinik"=>$record->ruang_poliklinik,
-				"ruang_jenis_masuk"=>$record->ruang_jenis_masuk,
-			);
-		}
-
-		## Response
-		$response = array(
-			"draw" => intval($draw),
-			"iTotalRecords" => $totalRecords,
-			"iTotalDisplayRecords" => $totalRecordwithFilter,
-			"aaData" => $data
-		);
-
-		return $response;
-	}
-
-	function getExcelTransaksi($postData=null){
-
-		$response = array();
-
-		## Read value
-		$draw = $postData['draw'];
-		$start = $postData['start'];
-		$rowperpage = $postData['length']; // Rows display per page
-		$columnIndex = $postData['order'][0]['column']; // Column index
-		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
-		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
-		$searchValue = $postData['search']['value']; // Search value
-
-		## Search
-		$searchQuery = "";
-		if($searchValue != ''){
-			$searchQuery = " (transaksi_id like '%".$searchValue."%' or transaksi_kelompok like '%".$searchValue."%' or transaksi_harga like'%".$searchValue."%' or transaksi_jumlah like'%".$searchValue."%' or transaksi_cara_bayar like'%".$searchValue."%' or transaksi_tanggal like'%".$searchValue."%') ";
-		}
-
-		## Total number of records without filtering
-		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('excel_transaksi')->result();
-		$totalRecords = $records[0]->allcount;
-
-		## Total number of record with filtering
-		$this->db->select('count(*) as allcount');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$records = $this->db->get('excel_transaksi')->result();
-		$totalRecordwithFilter = $records[0]->allcount;
-
-		## Fetch records
-		$this->db->select('*');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$this->db->order_by($columnName, $columnSortOrder);
-		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('excel_transaksi')->result();
-
-		$data = array();
-
-		foreach($records as $record ){
-
-			$data[] = array(
-				"transaksi_id"=>$record->transaksi_id,
-				"transaksi_kelompok"=>$record->transaksi_kelompok,
-				"transaksi_harga"=>'Rp. '.$record->transaksi_harga,
-				"transaksi_jumlah"=>$record->transaksi_jumlah,
-				"transaksi_cara_bayar"=>$record->transaksi_cara_bayar,
-				"transaksi_tanggal"=>$record->transaksi_tanggal,
-			);
-		}
-
-		## Response
-		$response = array(
-			"draw" => intval($draw),
-			"iTotalRecords" => $totalRecords,
-			"iTotalDisplayRecords" => $totalRecordwithFilter,
-			"aaData" => $data
-		);
-
-		return $response;
-	}
-
-	function getExcelBulanDokter($postData=null,$tanggal){
+	function getExcelBulanAnggota($postData=null,$tanggal){
 
 		$response = array();
 
@@ -518,7 +466,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelBulanObat($postData=null,$tanggal){
+	function getExcelBulanBuku($postData=null,$tanggal){
 
 		$response = array();
 
@@ -596,7 +544,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelBulanPasien($postData=null,$tanggal){
+	function getExcelBulanPeminjam($postData=null,$tanggal){
 
 		$response = array();
 
@@ -670,7 +618,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelBulanProdusen($postData=null,$tanggal){
+	function getExcelBulanPengunjung($postData=null,$tanggal){
 
 		$response = array();
 
@@ -738,7 +686,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelBulanRuang($postData=null,$tanggal){
+	function getDimensiAnggota($postData=null){
 
 		$response = array();
 
@@ -754,27 +702,23 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (ruang_id like '%".$searchValue."%' or ruang_poliklinik like '%".$searchValue."%' or ruang_jenis_masuk like'%".$searchValue."%') ";
+			$searchQuery = " (
+			id_anggota like '%".$searchValue."%' or 
+			nama_anggota like '%".$searchValue."%'
+			nomor_anggota like '%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
-		$records = $this->db->get()->result();
+		$records = $this->db->get('dim_anggota')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
-		$records = $this->db->get()->result();
+		$records = $this->db->get('dim_anggota')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -783,20 +727,16 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
-		$records = $this->db->get()->result();
+		$records = $this->db->get('dim_anggota')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"ruang_id"=>$record->ruang_id,
-				"ruang_poliklinik"=>$record->ruang_poliklinik,
-				"ruang_jenis_masuk"=>$record->ruang_jenis_masuk,
+				"id_anggota"=>$record->id_anggota,
+				"nama_anggota"=>$record->nama_anggota,
+				"nomor_anggota"=>$record->nomor_anggota,
 			);
 		}
 
@@ -811,7 +751,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getExcelBulanTransaksi($postData=null,$tanggal){
+	function getDimensiBuku($postData=null){
 
 		$response = array();
 
@@ -827,23 +767,23 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (transaksi_id like '%".$searchValue."%' or transaksi_kelompok like '%".$searchValue."%' or transaksi_harga like'%".$searchValue."%' or transaksi_jumlah like'%".$searchValue."%' or transaksi_cara_bayar like'%".$searchValue."%' or transaksi_tanggal like'%".$searchValue."%') ";
+			$searchQuery = " (
+			id_buku like '%".$searchValue."%' or 
+			kode_buku like '%".$searchValue."%' or 
+			judul_buku like'%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$this->db->from('excel_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
-		$records = $this->db->get()->result();
+		$records = $this->db->get('dim_buku')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$this->db->from('excel_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
-		$records = $this->db->get()->result();
+		$records = $this->db->get('dim_buku')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -852,21 +792,16 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$this->db->from('excel_transaksi');
-		$this->db->like('transaksi_tanggal',$tanggal);
-		$records = $this->db->get()->result();
+		$records = $this->db->get('dim_buku')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"transaksi_id"=>$record->transaksi_id,
-				"transaksi_kelompok"=>$record->transaksi_kelompok,
-				"transaksi_harga"=>'Rp. '.$record->transaksi_harga,
-				"transaksi_jumlah"=>$record->transaksi_jumlah,
-				"transaksi_cara_bayar"=>$record->transaksi_cara_bayar,
-				"transaksi_tanggal"=>$record->transaksi_tanggal,
+				"id_buku"=>$record->id_buku,
+				"kode_buku"=>$record->kode_buku,
+				"judul_buku"=>$record->judul_buku,
 			);
 		}
 
@@ -881,7 +816,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getDimensiDokter($postData=null){
+	function getDimensiPeminjam($postData=null){
 
 		$response = array();
 
@@ -897,19 +832,23 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (dokter_id like '%".$searchValue."%' or dokter_nama like '%".$searchValue."%') ";
+			$searchQuery = " (
+			id_peminjam like '%".$searchValue."%' or 
+			nama_peminjam like '%".$searchValue."%' or 
+			nomor_anggota like '%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('dim_dokter')->result();
+		$records = $this->db->get('dim_peminjam')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('dim_dokter')->result();
+		$records = $this->db->get('dim_peminjam')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -918,15 +857,16 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('dim_dokter')->result();
+		$records = $this->db->get('dim_peminjam')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"dokter_id"=>$record->dokter_id,
-				"dokter_nama"=>$record->dokter_nama,
+				"id_peminjam"=>$record->id_peminjam,
+				"nama_peminjam"=>$record->nama_peminjam,
+				"nomor_anggota"=>$record->nomor_anggota,
 			);
 		}
 
@@ -941,7 +881,7 @@ class DataModel extends CI_Model
 		return $response;
 	}
 
-	function getDimensiObat($postData=null){
+	function getDimensiPengunjung($postData=null){
 
 		$response = array();
 
@@ -957,19 +897,23 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (obat_id like '%".$searchValue."%' or obat_kode like '%".$searchValue."%' or obat_nama like'%".$searchValue."%') ";
+			$searchQuery = " (
+			id_pengunjung like '%".$searchValue."%' or 
+			nama_pengunjung like '%".$searchValue."%'
+			nik_pengunjung like '%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('dim_obat')->result();
+		$records = $this->db->get('dim_pengunjung')->result();
 		$totalRecords = $records[0]->allcount;
 
 		## Total number of record with filtering
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$records = $this->db->get('dim_obat')->result();
+		$records = $this->db->get('dim_pengunjung')->result();
 		$totalRecordwithFilter = $records[0]->allcount;
 
 		## Fetch records
@@ -978,258 +922,16 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('dim_obat')->result();
+		$records = $this->db->get('dim_pengunjung')->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
 			$data[] = array(
-				"obat_id"=>$record->obat_id,
-				"obat_kode"=>$record->obat_kode,
-				"obat_nama"=>$record->obat_nama,
-			);
-		}
-
-		## Response
-		$response = array(
-			"draw" => intval($draw),
-			"iTotalRecords" => $totalRecords,
-			"iTotalDisplayRecords" => $totalRecordwithFilter,
-			"aaData" => $data
-		);
-
-		return $response;
-	}
-
-	function getDimensiPasien($postData=null){
-
-		$response = array();
-
-		## Read value
-		$draw = $postData['draw'];
-		$start = $postData['start'];
-		$rowperpage = $postData['length']; // Rows display per page
-		$columnIndex = $postData['order'][0]['column']; // Column index
-		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
-		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
-		$searchValue = $postData['search']['value']; // Search value
-
-		## Search
-		$searchQuery = "";
-		if($searchValue != ''){
-			$searchQuery = " (pasien_id like '%".$searchValue."%' or pasien_nama like '%".$searchValue."%') ";
-		}
-
-		## Total number of records without filtering
-		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('dim_pasien')->result();
-		$totalRecords = $records[0]->allcount;
-
-		## Total number of record with filtering
-		$this->db->select('count(*) as allcount');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$records = $this->db->get('dim_pasien')->result();
-		$totalRecordwithFilter = $records[0]->allcount;
-
-		## Fetch records
-		$this->db->select('*');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$this->db->order_by($columnName, $columnSortOrder);
-		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('dim_pasien')->result();
-
-		$data = array();
-
-		foreach($records as $record ){
-
-			$data[] = array(
-				"pasien_id"=>$record->pasien_id,
-				"pasien_nama"=>$record->pasien_nama,
-			);
-		}
-
-		## Response
-		$response = array(
-			"draw" => intval($draw),
-			"iTotalRecords" => $totalRecords,
-			"iTotalDisplayRecords" => $totalRecordwithFilter,
-			"aaData" => $data
-		);
-
-		return $response;
-	}
-
-	function getDimensiProdusen($postData=null){
-
-		$response = array();
-
-		## Read value
-		$draw = $postData['draw'];
-		$start = $postData['start'];
-		$rowperpage = $postData['length']; // Rows display per page
-		$columnIndex = $postData['order'][0]['column']; // Column index
-		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
-		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
-		$searchValue = $postData['search']['value']; // Search value
-
-		## Search
-		$searchQuery = "";
-		if($searchValue != ''){
-			$searchQuery = " (produsen_id like '%".$searchValue."%' or produsen_nama like '%".$searchValue."%') ";
-		}
-
-		## Total number of records without filtering
-		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('dim_produsen')->result();
-		$totalRecords = $records[0]->allcount;
-
-		## Total number of record with filtering
-		$this->db->select('count(*) as allcount');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$records = $this->db->get('dim_produsen')->result();
-		$totalRecordwithFilter = $records[0]->allcount;
-
-		## Fetch records
-		$this->db->select('*');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$this->db->order_by($columnName, $columnSortOrder);
-		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('dim_produsen')->result();
-
-		$data = array();
-
-		foreach($records as $record ){
-
-			$data[] = array(
-				"produsen_id"=>$record->produsen_id,
-				"produsen_nama"=>$record->produsen_nama,
-			);
-		}
-
-		## Response
-		$response = array(
-			"draw" => intval($draw),
-			"iTotalRecords" => $totalRecords,
-			"iTotalDisplayRecords" => $totalRecordwithFilter,
-			"aaData" => $data
-		);
-
-		return $response;
-	}
-
-	function getDimensiRuang($postData=null){
-
-		$response = array();
-
-		## Read value
-		$draw = $postData['draw'];
-		$start = $postData['start'];
-		$rowperpage = $postData['length']; // Rows display per page
-		$columnIndex = $postData['order'][0]['column']; // Column index
-		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
-		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
-		$searchValue = $postData['search']['value']; // Search value
-
-		## Search
-		$searchQuery = "";
-		if($searchValue != ''){
-			$searchQuery = " (ruang_id like '%".$searchValue."%' or ruang_poliklinik like '%".$searchValue."%') ";
-		}
-
-		## Total number of records without filtering
-		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('dim_ruang')->result();
-		$totalRecords = $records[0]->allcount;
-
-		## Total number of record with filtering
-		$this->db->select('count(*) as allcount');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$records = $this->db->get('dim_ruang')->result();
-		$totalRecordwithFilter = $records[0]->allcount;
-
-		## Fetch records
-		$this->db->select('*');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$this->db->order_by($columnName, $columnSortOrder);
-		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('dim_ruang')->result();
-
-		$data = array();
-
-		foreach($records as $record ){
-
-			$data[] = array(
-				"ruang_id"=>$record->ruang_id,
-				"ruang_poliklinik"=>$record->ruang_poliklinik,
-			);
-		}
-
-		## Response
-		$response = array(
-			"draw" => intval($draw),
-			"iTotalRecords" => $totalRecords,
-			"iTotalDisplayRecords" => $totalRecordwithFilter,
-			"aaData" => $data
-		);
-
-		return $response;
-	}
-
-	function getDimensiTransaksi($postData=null){
-
-		$response = array();
-
-		## Read value
-		$draw = $postData['draw'];
-		$start = $postData['start'];
-		$rowperpage = $postData['length']; // Rows display per page
-		$columnIndex = $postData['order'][0]['column']; // Column index
-		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
-		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
-		$searchValue = $postData['search']['value']; // Search value
-
-		## Search
-		$searchQuery = "";
-		if($searchValue != ''){
-			$searchQuery = " (transaksi_id like '%".$searchValue."%' or transaksi_harga like'%".$searchValue."%' or transaksi_jumlah like'%".$searchValue."%' or transaksi_total like'%".$searchValue."%') ";
-		}
-
-		## Total number of records without filtering
-		$this->db->select('count(*) as allcount');
-		$records = $this->db->get('dim_transaksi')->result();
-		$totalRecords = $records[0]->allcount;
-
-		## Total number of record with filtering
-		$this->db->select('count(*) as allcount');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$records = $this->db->get('dim_transaksi')->result();
-		$totalRecordwithFilter = $records[0]->allcount;
-
-		## Fetch records
-		$this->db->select('*');
-		if($searchQuery != '')
-			$this->db->where($searchQuery);
-		$this->db->order_by($columnName, $columnSortOrder);
-		$this->db->limit($rowperpage, $start);
-		$records = $this->db->get('dim_transaksi')->result();
-
-		$data = array();
-
-		foreach($records as $record ){
-
-			$data[] = array(
-				"transaksi_id"=>$record->transaksi_id,
-				"transaksi_harga"=>$record->transaksi_harga,
-				"transaksi_jumlah"=>$record->transaksi_jumlah,
-				"transaksi_total"=>$record->transaksi_total,
+				"id_pengunjung"=>$record->id_pengunjung,
+				"nama_pengunjung"=>$record->nama_pengunjung,
+				"nik_pengunjung"=>$record->nik_pengunjung,
 			);
 		}
 
@@ -1260,7 +962,13 @@ class DataModel extends CI_Model
 		## Search
 		$searchQuery = "";
 		if($searchValue != ''){
-			$searchQuery = " (waktu_id like '%".$searchValue."%' or waktu_hari like'%".$searchValue."%' or waktu_tanggal like'%".$searchValue."%' or waktu_bulan like'%".$searchValue."%' or waktu_tahun like'%".$searchValue."%') ";
+			$searchQuery = " (
+			id_waktu like '%".$searchValue."%' or 
+			waktu like'%".$searchValue."%' or 
+			hari_waktu like'%".$searchValue."%' or 
+			bulan_waktu like'%".$searchValue."%' or 
+			tahun_waktu like'%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
@@ -1288,11 +996,11 @@ class DataModel extends CI_Model
 		foreach($records as $record ){
 
 			$data[] = array(
-				"waktu_id"=>$record->waktu_id,
-				"waktu_hari"=>$record->waktu_hari,
-				"waktu_tanggal"=>$record->waktu_tanggal,
-				"waktu_bulan"=>$record->waktu_bulan,
-				"waktu_tahun"=>$record->waktu_tahun,
+				"id_waktu"=>$record->id_waktu,
+				"waktu"=>$record->waktu,
+				"hari_waktu"=>$record->hari_waktu,
+				"bulan_waktu"=>$record->bulan_waktu,
+				"tahun_waktu"=>$record->tahun_waktu,
 			);
 		}
 

@@ -26,7 +26,7 @@
 					<div class="card-body">
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" id="dt-excel-anggota">
 									<thead class="text-center">
 									<tr>
 										<th rowspan="3">Nama</th>
@@ -47,29 +47,11 @@
 										<th>P</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($anggota as $key=>$value):
-									?>
-									<tr>
-										<td><?= $value['anggota_nama'] ?></td>
-										<td><?= $value['anggota_nomor'] ?></td>
-										<td><?= $value['anggota_umum_l'] ?></td>
-										<td><?= $value['anggota_umum_p'] ?></td>
-										<td><?= $value['anggota_mahasiswa_l'] ?></td>
-										<td><?= $value['anggota_mahasiswa_p'] ?></td>
-										<td><?= $value['anggota_pelajar_l'] ?></td>
-										<td><?= $value['anggota_pelajar_p'] ?></td>
-									</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_2">
-								<table class="table table-bordered table-striped example1">
+								<table class="table table-bordered table-striped example1" id="dt-excel-buku" style="width: 100%">
 									<thead>
 									<tr>
 										<th>ID Buku</th>
@@ -81,28 +63,11 @@
 										<th>Subjek</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($buku as $key=>$value):
-									?>
-									<tr>
-										<td><?= $value['buku_id'] ?></td>
-										<td><?= $value['buku_kode'] ?></td>
-										<td><?= $value['buku_judul'] ?></td>
-										<td><?= $value['buku_edisi'] ?></td>
-										<td><?= $value['buku_penerbit'] ?></td>
-										<td><?= $value['buku_fisik'] ?></td>
-										<td><?= $value['buku_subjek'] ?></td>
-									</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_3">
-								<table class="table table-bordered table-striped example1 table-responsive" width="100%">
+								<table class="table table-bordered table-striped example1 table-responsive" id="dt-excel-peminjam" width="100%">
 									<thead class="text-center">
 									<tr>
 										<th rowspan="3">Nama</th>
@@ -134,40 +99,11 @@
 										<th>P</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($peminjam as $key=>$value):
-									?>
-									<tr>
-										<td><?= $value['peminjam_nama'] ?></td>
-										<td><?= $value['peminjam_no_anggota'] ?></td>
-										<td><?= $value['peminjam_umum_l'] ?></td>
-										<td><?= $value['peminjam_umum_p'] ?></td>
-										<td><?= $value['peminjam_mahasiswa_l'] ?></td>
-										<td><?= $value['peminjam_mahasiswa_p'] ?></td>
-										<td><?= $value['peminjam_pelajar_l'] ?></td>
-										<td><?= $value['peminjam_pelajar_p'] ?></td>
-										<td><?= $value['peminjam_klas_000'] ?></td>
-										<td><?= $value['peminjam_klas_100'] ?></td>
-										<td><?= $value['peminjam_klas_200'] ?></td>
-										<td><?= $value['peminjam_klas_300'] ?></td>
-										<td><?= $value['peminjam_klas_400'] ?></td>
-										<td><?= $value['peminjam_klas_500'] ?></td>
-										<td><?= $value['peminjam_klas_600'] ?></td>
-										<td><?= $value['peminjam_klas_700'] ?></td>
-										<td><?= $value['peminjam_klas_800'] ?></td>
-										<td><?= $value['peminjam_klas_900'] ?></td>
-										<td><?= $value['time'] ?></td>
-									</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane" id="tab_4">
-								<table class="table table-bordered table-striped example1" width="100%">
+								<table class="table table-bordered table-striped example1" width="100%" id="dt-excel-pengunjung">
 									<thead class="text-center">
 									<tr>
 										<th rowspan="3">Nama</th>
@@ -188,24 +124,6 @@
 										<th>P</th>
 									</tr>
 									</thead>
-									<tbody>
-									<?php
-									foreach($pengunjung as $key=>$value):
-									?>
-									<tr>
-										<td><?= $value['pengunjung_nama'] ?></td>
-										<td><?= $value['pengunjung_nik'] ?></td>
-										<td><?= $value['pengunjung_umum_l'] ?></td>
-										<td><?= $value['pengunjung_umum_p'] ?></td>
-										<td><?= $value['pengunjung_mahasiswa_l'] ?></td>
-										<td><?= $value['pengunjung_mahasiswa_p'] ?></td>
-										<td><?= $value['pengunjung_pelajar_l'] ?></td>
-										<td><?= $value['pengunjung_pelajar_p'] ?></td>
-									</tr>
-									<?php
-									endforeach;
-									?>
-									</tbody>
 								</table>
 							</div>
 							<!-- /.tab-pane -->

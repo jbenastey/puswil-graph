@@ -25,124 +25,84 @@ class DataController extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function excelDokter(){
+	public function excelAnggota(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getExcelDokter($postData);
+		$data = $this->DataModel->getExcelAnggota($postData);
 
 		echo json_encode($data);
 	}
-	public function excelObat(){
+	public function excelBuku(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getExcelObat($postData);
+		$data = $this->DataModel->getExcelBuku($postData);
 
 		echo json_encode($data);
 	}
-	public function excelPasien(){
+	public function excelPeminjam(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getExcelPasien($postData);
+		$data = $this->DataModel->getExcelPeminjam($postData);
 
 		echo json_encode($data);
 	}
-	public function excelProdusen(){
+	public function excelPengunjung(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getExcelProdusen($postData);
-
-		echo json_encode($data);
-	}
-	public function excelRuang(){
-
-		// POST data
-		$postData = $this->input->post();
-
-		// Get data
-		$data = $this->DataModel->getExcelRuang($postData);
-
-		echo json_encode($data);
-	}
-	public function excelTransaksi(){
-
-		// POST data
-		$postData = $this->input->post();
-
-		// Get data
-		$data = $this->DataModel->getExcelTransaksi($postData);
+		$data = $this->DataModel->getExcelPengunjung($postData);
 
 		echo json_encode($data);
 	}
 
-	public function dimensiDokter(){
+	public function dimensiAnggota(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getDimensiDokter($postData);
+		$data = $this->DataModel->getDimensiAnggota($postData);
 
 		echo json_encode($data);
 	}
-	public function dimensiObat(){
+	public function dimensiBuku(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getDimensiObat($postData);
+		$data = $this->DataModel->getDimensiBuku($postData);
 
 		echo json_encode($data);
 	}
-	public function dimensiPasien(){
+	public function dimensiPeminjam(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getDimensiPasien($postData);
+		$data = $this->DataModel->getDimensiPeminjam($postData);
 
 		echo json_encode($data);
 	}
-	public function dimensiProdusen(){
+	public function dimensiPengunjung(){
 
 		// POST data
 		$postData = $this->input->post();
 
 		// Get data
-		$data = $this->DataModel->getDimensiProdusen($postData);
-
-		echo json_encode($data);
-	}
-	public function dimensiRuang(){
-
-		// POST data
-		$postData = $this->input->post();
-
-		// Get data
-		$data = $this->DataModel->getDimensiRuang($postData);
-
-		echo json_encode($data);
-	}
-	public function dimensiTransaksi(){
-
-		// POST data
-		$postData = $this->input->post();
-
-		// Get data
-		$data = $this->DataModel->getDimensiTransaksi($postData);
+		$data = $this->DataModel->getDimensiPengunjung($postData);
 
 		echo json_encode($data);
 	}
@@ -156,6 +116,7 @@ class DataController extends CI_Controller
 
 		echo json_encode($data);
 	}
+
 	public function laporan(){
 
 		// POST data
@@ -181,66 +142,46 @@ class DataController extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
-	public function excelBulanDokter($tanggal){
+	public function excelBulanAnggota($tanggal){
 
 		// POST data
 		$postData = $this->input->post();
 		$bulan = str_replace('-','/',$tanggal);
 
 		// Get data
-		$data = $this->DataModel->getExcelBulanDokter($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanAnggota($postData,$bulan);
 
 		echo json_encode($data);
 	}
-	public function excelBulanObat($tanggal){
+	public function excelBulanBuku($tanggal){
 
 		// POST data
 		$postData = $this->input->post();
 		$bulan = str_replace('-','/',$tanggal);
 
 		// Get data
-		$data = $this->DataModel->getExcelBulanObat($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanBuku($postData,$bulan);
 
 		echo json_encode($data);
 	}
-	public function excelBulanPasien($tanggal){
+	public function excelBulanPeminjam($tanggal){
 
 		// POST data
 		$postData = $this->input->post();
 		$bulan = str_replace('-','/',$tanggal);
 
 		// Get data
-		$data = $this->DataModel->getExcelBulanPasien($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanPeminjam($postData,$bulan);
 
 		echo json_encode($data);
 	}
-	public function excelBulanProdusen($tanggal){
+	public function excelBulanPengunjung($tanggal){
 
 		// POST data
 		$postData = $this->input->post();
 		$bulan = str_replace('-','/',$tanggal);
 		// Get data
-		$data = $this->DataModel->getExcelBulanProdusen($postData,$bulan);
-
-		echo json_encode($data);
-	}
-	public function excelBulanRuang($tanggal){
-
-		// POST data
-		$postData = $this->input->post();
-		$bulan = str_replace('-','/',$tanggal);
-		// Get data
-		$data = $this->DataModel->getExcelBulanRuang($postData,$bulan);
-
-		echo json_encode($data);
-	}
-	public function excelBulanTransaksi($tanggal){
-
-		// POST data
-		$postData = $this->input->post();
-		$bulan = str_replace('-','/',$tanggal);
-		// Get data
-		$data = $this->DataModel->getExcelBulanTransaksi($postData,$bulan);
+		$data = $this->DataModel->getExcelBulanPengunjung($postData,$bulan);
 
 		echo json_encode($data);
 	}

@@ -67,3 +67,16 @@ $route['grafik_waktu/(:any)'] = 'ProsesController/grafik_waktu/$1';
 
 $route['login'] = 'AuthController/login';
 $route['logout'] = 'AuthController/logout';
+
+$route['data-fakta'] = 'DataController/fakta';
+
+$route['data-excel-anggota'] = 'DataController/excelAnggota';
+$route['data-excel-buku'] = 'DataController/excelBuku';
+$route['data-excel-peminjam'] = 'DataController/excelPeminjam';
+$route['data-excel-pengunjung'] = 'DataController/excelPengunjung';
+
+$route['data-dimensi-anggota'] = 'DataController/dimensiAnggota';
+$route['data-dimensi-buku'] = 'DataController/dimensiBuku';
+$route['data-dimensi-peminjam'] = 'DataController/dimensiPeminjam';
+$route['data-dimensi-pengunjung'] = 'DataController/dimensiPengunjung';
+$route['data-dimensi-waktu'] = 'DataController/dimensiWaktu';
