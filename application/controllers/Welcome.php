@@ -32,7 +32,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	public function grafik(){
-		$data['getHapus'] = $this->proses->getHapus();
+		$data['getHapus'] = $this->proses->getHapusTahun();
 		$this->load->view('templates/header');
 		$this->load->view('grafik',$data);
 		$this->load->view('templates/footer');
