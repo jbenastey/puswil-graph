@@ -111,4 +111,13 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function hapus($table,$id,$key){
+		$this->db->where($key,$id);
+		$this->db->delete($table);
+	}
+
+	public function hapus_semua($table){
+		$this->db->empty_table($table);
+	}
 }

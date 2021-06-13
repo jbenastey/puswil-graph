@@ -88,3 +88,6 @@ $route['data-excel-bulan-anggota/(:any)'] = 'DataController/excelBulanAnggota/$1
 $route['data-excel-bulan-buku/(:any)'] = 'DataController/excelBulanBuku/$1';
 $route['data-excel-bulan-peminjam/(:any)'] = 'DataController/excelBulanPeminjam/$1';
 $route['data-excel-bulan-pengunjung/(:any)'] = 'DataController/excelBulanPengunjung/$1';
+
+$route['hapus/(:any)/(:any)'] = 'ProsesController/hapus/$1/$2';
+$route['hapus-semua'] = 'ProsesController/hapusSemua';

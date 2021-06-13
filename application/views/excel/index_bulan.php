@@ -58,6 +58,7 @@ function toBulan($tanggal){
 										<th rowspan="3">Nama</th>
 										<th rowspan="3">Nomor</th>
 										<th colspan="6">Status</th>
+										<th rowspan="3">Aksi</th>
 									</tr>
 									<tr>
 										<th colspan="2">Umum</th>

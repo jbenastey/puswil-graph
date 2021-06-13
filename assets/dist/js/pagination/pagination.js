@@ -122,6 +122,7 @@ $(document).ready(function(){
 			{ data: 'anggota_mahasiswa_p' },
 			{ data: 'anggota_pelajar_l' },
 			{ data: 'anggota_pelajar_p' },
+			{ data: 'aksi' },
 		]
 	});
 

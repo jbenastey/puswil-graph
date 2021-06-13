@@ -468,6 +468,8 @@ class DataModel extends CI_Model
 				"anggota_mahasiswa_p"=>$record->anggota_mahasiswa_p,
 				"anggota_pelajar_l"=>$record->anggota_pelajar_l,
 				"anggota_pelajar_p"=>$record->anggota_pelajar_p,
+				"aksi"=>'<a href="'.base_url('hapus/'.$tanggal.'/'.$record->anggota_id).'" class="btn btn-sm btn-danger" title="Hapus Data ?"><i class="fa fa-trash"></i></a>',
+
 			);
 		}
 

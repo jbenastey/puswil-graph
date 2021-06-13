@@ -539,4 +539,39 @@ class ProsesController extends CI_Controller
 		);
 		echo json_encode($data);
 	}
+
+	public function hapus($bulan,$id){
+
+		$excel = $this->proses->lihat('excel_anggota');
+		$dimensi = $this->proses->lihat('dim_anggota');
+
+		if (count($excel) == count($dimensi)){
+			$this->proses->hapus('excel_anggota',$id,'anggota_id');
+			$this->proses->hapus('excel_buku',$id,'buku_id');
+			$this->proses->hapus('excel_peminjam',$id,'peminjam_id');
+			$this->proses->hapus('excel_pengunjung',$id,'pengunjung_id');
+			$this->proses->hapus('dim_anggota',$id,'id_anggota');
+			$this->proses->hapus('dim_buku',$id,'id_buku');
+			$this->proses->hapus('dim_peminjam',$id,'id_peminjam');
+			$this->proses->hapus('dim_pengunjung',$id,'id_pengunjung');
+			$this->proses->hapus('dim_waktu',$id,'id_waktu');
+			$this->proses->hapus('fact_peminjaman',$id,'id_anggota');
+			redirect('excel-bulan/'.$bulan);
+		} else {
+			redirect('excel-bulan/'.$bulan);
+		}
+	}
+	public function hapusSemua(){
+		$this->proses->hapus_semua('excel_anggota');
+		$this->proses->hapus_semua('excel_buku');
+		$this->proses->hapus_semua('excel_peminjam');
+		$this->proses->hapus_semua('excel_pengunjung');
+		$this->proses->hapus_semua('dim_anggota');
+		$this->proses->hapus_semua('dim_buku');
+		$this->proses->hapus_semua('dim_peminjam');
+		$this->proses->hapus_semua('dim_pengunjung');
+		$this->proses->hapus_semua('dim_waktu');
+		$this->proses->hapus_semua('fact_peminjaman');
+		redirect('mentah');
+	}
 }

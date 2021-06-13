@@ -21,6 +21,7 @@
 							<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Buku</a></li>
 							<li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Peminjam</a></li>
 							<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab">Pengunjung</a></li>
+							<li class="nav-item"><a class="nav-link btn-danger text-white btn-sm" href="<?= base_url('hapus-semua') ?>" onclick="return confirm('Hapus semua data?')">Hapus Semua Data</a></li>
 						</ul>
 					</div><!-- /.card-header -->
 					<div class="card-body">
