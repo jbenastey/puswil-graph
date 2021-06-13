@@ -1,9 +1,14 @@
+<style type="text/css" media="print">
+	@page { size: landscape; }
+	.cetak-grafik{
+		display: block;
+	}
+</style>
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6 col-lg-12">
 				<h1 class="m-0 text-dark">Beranda</h1>
-				<button type="button" onclick="window.print()" class="btn btn-sm btn-outline-primary float-right"><i class="fa fa-print"></i> Cetak</button>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
@@ -74,192 +79,6 @@
 							class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
-		</div>
-		<div>
-		<div class="row">
-			<div class="col-lg-3 col-6">
-				<div class="small-box bg-primary-gradient">
-					<div class="inner">
-						<h4>&nbsp;<span id="buku-banyak"></span></h4>
-
-						<p>Buku Terbanyak </p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-book"></i>
-					</div>
-					<a href="#banyak" class="small-box-footer d-print-none">Lihat Data <i
-							class="fa fa-arrow-circle-down"></i></a>
-				</div>
-			</div>
-			<div class="col-lg-3 col-6">
-				<div class="small-box bg-primary-gradient">
-					<div class="inner">
-						<h4>&nbsp;<span id="pinjam-banyak"></span></h4>
-						<br>
-						<p>Peminjam Terbanyak </p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-user"></i>
-					</div>
-					<a href="#banyak" class="small-box-footer d-print-none">Lihat Data <i
-							class="fa fa-arrow-circle-down"></i></a>
-				</div>
-			</div>
-			<div class="col-lg-3 col-6">
-				<div class="small-box bg-primary-gradient">
-					<div class="inner">
-						<h4>&nbsp;<span id="anggota-banyak"></span></h4>
-
-						<p>Kategori Anggota Peminjam Terbanyak</p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-user"></i>
-					</div>
-					<a href="#banyak2" class="small-box-footer d-print-none">Lihat Data <i
-							class="fa fa-arrow-circle-down"></i></a>
-				</div>
-			</div>
-			<div class="col-lg-3 col-6">
-				<div class="small-box bg-primary-gradient">
-					<div class="inner">
-						<h4>&nbsp;<span id="pengunjung-banyak"></span></h4>
-
-						<p>Kategori Pengunjung Peminjam Terbanyak </p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-user"></i>
-					</div>
-					<a href="#banyak3" class="small-box-footer d-print-none">Lihat Data <i
-							class="fa fa-arrow-circle-down"></i></a>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="banyak2">
-			<div class="col-8">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="anggota-bar-chart" width="auto" height="280"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="anggota-pie-chart" width="auto" height="280"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-8">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="anggota-bar-chart2" width="auto" height="280"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="anggota-pie-chart2" width="auto" height="280"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="banyak3">
-			<div class="col-8">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="pengunjung-bar-chart" width="auto" height="280"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="pengunjung-pie-chart" width="auto" height="280"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body">
-						<div class="">
-							<select name="" id="tahun" class="form-control d-print-none">
-								<option value="2015">2015</option>
-								<option value="2016">2016</option>
-								<option value="2017">2017</option>
-								<option value="2018">2018</option>
-								<option value="2019">2019</option>
-								<option value="2020">2020</option>
-								<option value="2021">2021</option>
-								<option value="2022">2022</option>
-								<option value="2023">2023</option>
-								<option value="2024">2024</option>
-								<option value="2025">2025</option>
-							</select>
-						</div>
-						<div class="chart">
-							<canvas id="peminjam-line-chart" width="auto" height="280"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="banyak">
-			<div class="col-6">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="buku-banyak-chart" height="1000"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-6">
-				<div class="card">
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="pinjam-banyak-chart" height="1000"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-<!--		<div class="row" id="banyak2">-->
-<!--			<div class="col-6">-->
-<!--				<div class="card">-->
-<!--					<div class="card-body">-->
-<!--						<div class="chart">-->
-<!--							<canvas id="anggota-banyak-chart" height="1000"></canvas>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<div class="col-6">-->
-<!--				<div class="card">-->
-<!--					<div class="card-body">-->
-<!--						<div class="chart">-->
-<!--							<canvas id="pengunjung-banyak-chart" height="1000"></canvas>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
 		</div>
 	</div>
 </section>

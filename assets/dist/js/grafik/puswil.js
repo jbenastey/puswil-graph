@@ -467,6 +467,7 @@ $(document).ready(function () {
 		cache: false,
 		dataType: 'json',
 		success: function (response) {
+			console.log(response.anggota[0]);
 			console.log(response.pengunjung[0]);
 			var anggotaBanyak = null;
 			if (response.anggota[0].anggota_umum_l == 1){
@@ -502,6 +503,8 @@ $(document).ready(function () {
 					pengunjungBanyak = 'Pelajar';
 				}
 			}
+			console.log(anggotaBanyak);
+			console.log(pengunjungBanyak);
 			$('#buku-banyak').html(response.buku[0].buku_judul +'<br>'+response.buku[0].buku_kode);
 			$('#pinjam-banyak').html(response.pinjam[0].peminjam_nama);
 			$('#anggota-banyak').html(anggotaBanyak);

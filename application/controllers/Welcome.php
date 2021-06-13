@@ -5,6 +5,7 @@ class Welcome extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('ProsesModel', 'proses');
 		if (!$this->session->has_userdata('pengguna_id')) {
 			redirect(base_url('login'));
 		}
@@ -28,6 +29,12 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('templates/header');
 		$this->load->view('index');
+		$this->load->view('templates/footer');
+	}
+	public function grafik(){
+		$data['getHapus'] = $this->proses->getHapus();
+		$this->load->view('templates/header');
+		$this->load->view('grafik',$data);
 		$this->load->view('templates/footer');
 	}
 }

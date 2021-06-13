@@ -96,3 +96,5 @@ $route['laporan'] = 'ProsesController/laporan';
 $route['data-laporan'] = 'DataController/laporan';
 $route['pilih-laporan-bulan'] = 'ProsesController/pilihLaporanBulan';
 $route['laporan-bulan/(:any)'] = 'ProsesController/laporanBulan/$1';
+
+$route['grafik'] = 'welcome/grafik';
