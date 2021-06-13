@@ -574,4 +574,58 @@ class ProsesController extends CI_Controller
 		$this->proses->hapus_semua('fact_peminjaman');
 		redirect('mentah');
 	}
+
+	public function laporan(){
+		$data = array(
+			'laporan' => $this->proses->laporan()
+		);
+		$this->load->view('templates/header');
+		$this->load->view('laporan/index', $data);
+		$this->load->view('templates/footer');
+	}
+
+	function pilihLaporanBulan(){
+		$data['getHapus'] = $this->proses->getHapus();
+		$this->load->view('templates/header');
+		$this->load->view('laporan/pilih_bulan',$data);
+		$this->load->view('templates/footer');
+	}
+
+	function laporanBulan($tanggal){
+		$data = array(
+			'status' => array(),
+			'jenis_kelamin' => array(),
+		);
+
+		$data['bulan'] = $tanggal;
+		$tgl = explode('-',$tanggal);
+
+		$data['laporan'] = $this->proses->laporan_bulan($tgl[1],$tgl[0]);
+
+		foreach ($data['laporan'] as $key=>$value) {
+			if ($value['anggota_umum_l'] != null){
+				$data['status'][$key] = 'umum';
+				$data['jenis_kelamin'][$key] = 'laki-laki';
+			}elseif ($value['anggota_umum_p'] != null){
+				$data['status'][$key] = 'umum';
+				$data['jenis_kelamin'][$key] = 'perempuan';
+			}elseif ($value['anggota_mahasiswa_l'] != null){
+				$data['status'][$key] = 'mahasiswa';
+				$data['jenis_kelamin'][$key] = 'laki-laki';
+			}elseif ($value['anggota_mahasiswa_p'] != null){
+				$data['status'][$key] = 'mahasiswa';
+				$data['jenis_kelamin'][$key] = 'laki-laki';
+			}elseif ($value['anggota_pelajar_l'] != null){
+				$data['status'][$key] = 'pelajar';
+				$data['jenis_kelamin'][$key] = 'laki-laki';
+			}elseif ($value['anggota_pelajar_p'] != null){
+				$data['status'][$key] = 'pelajar';
+				$data['jenis_kelamin'][$key] = 'perempuan';
+			}
+		}
+
+		$this->load->view('templates/header');
+		$this->load->view('laporan/cetak', $data);
+		$this->load->view('templates/footer');
+	}
 }

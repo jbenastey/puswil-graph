@@ -273,24 +273,15 @@ $(document).ready(function(){
 			'url': root + 'data-laporan'
 		},
 		'columns': [
-			{ data: 'obat_kode' },
-			{ data: 'obat_nama' },
-			{ data: 'obat_golongan' },
-			{ data: 'obat_bentuk' },
-			{ data: 'obat_depo' },
-			{ data: 'produsen_nama' },
-			{ data: 'pasien_nama' },
-			{ data: 'pasien_jenis_kelamin' },
-			{ data: 'pasien_umur' },
-			{ data: 'ruang_poliklinik' },
-			{ data: 'ruang_jenis_masuk' },
-			{ data: 'dokter_nama' },
-			{ data: 'transaksi_kelompok' },
-			{ data: 'transaksi_harga' },
-			{ data: 'transaksi_jumlah' },
-			{ data: 'transaksi_total' },
-			{ data: 'transaksi_cara_bayar' },
-			{ data: 'transaksi_tanggal' },
+			{ data: 'anggota_nama' },
+			{ data: 'anggota_nomor' },
+			{ data: 'anggota_jenis_kelamin' },
+			{ data: 'anggota_status' },
+			{ data: 'buku_judul' },
+			{ data: 'buku_kode' },
+			{ data: 'buku_edisi' },
+			{ data: 'buku_penerbit' },
+			{ data: 'time' },
 		]
 	});
 

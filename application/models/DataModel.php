@@ -1109,37 +1109,24 @@ class DataModel extends CI_Model
 		$searchQuery = "";
 		if($searchValue != ''){
 			$searchQuery = " (
-			obat_kode like '%".$searchValue."%' or 
-			obat_nama like'%".$searchValue."%' or 
-			obat_golongan like'%".$searchValue."%' or 
-			obat_bentuk like'%".$searchValue."%' or 
-			obat_depo like'%".$searchValue."%' or 
-			produsen_nama like'%".$searchValue."%' or 
-			pasien_nama like'%".$searchValue."%' or 
-			pasien_jenis_kelamin like'%".$searchValue."%' or 
-			pasien_umur like'%".$searchValue."%' or 
-			ruang_poliklinik like'%".$searchValue."%' or 
-			ruang_jenis_masuk like'%".$searchValue."%' or 
-			dokter_nama like'%".$searchValue."%' or 
-			transaksi_kelompok like'%".$searchValue."%' or 
-			transaksi_harga like'%".$searchValue."%' or 
-			transaksi_jumlah like'%".$searchValue."%' or 
-			transaksi_total like'%".$searchValue."%' or 
-			transaksi_cara_bayar like'%".$searchValue."%' or 
-			transaksi_tanggal like'%".$searchValue."%') ";
+			anggota_nama like '%".$searchValue."%' or 
+			anggota_nomor like'%".$searchValue."%' or 
+			buku_judul like'%".$searchValue."%' or 
+			buku_kode like'%".$searchValue."%' or 
+			buku_edisi like'%".$searchValue."%' or 
+			buku_penerbit like'%".$searchValue."%' or 
+			time like'%".$searchValue."%'
+			) ";
 		}
 
 		## Total number of records without filtering
 		$this->db->select('count(*) as allcount');
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
-		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
-		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
-		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
-		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
-		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('dim_waktu','dim_waktu.id_waktu = fact_peminjaman.id_waktu');
 		$records = $this->db->get()->result();
 		$totalRecords = $records[0]->allcount;
 
@@ -1147,15 +1134,12 @@ class DataModel extends CI_Model
 		$this->db->select('count(*) as allcount');
 		if($searchQuery != '')
 			$this->db->where($searchQuery);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
-		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
-		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
-		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
-		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
-		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('dim_waktu','dim_waktu.id_waktu = fact_peminjaman.id_waktu');
 		$records = $this->db->get()->result();
 
 		$totalRecordwithFilter = $records[0]->allcount;
@@ -1166,40 +1150,48 @@ class DataModel extends CI_Model
 			$this->db->where($searchQuery);
 		$this->db->order_by($columnName, $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
-		$this->db->from('fact_penjualan');
-		$this->db->join('excel_dokter','excel_dokter.dokter_id = fact_penjualan.id_dokter');
-		$this->db->join('excel_pasien','excel_pasien.pasien_id = fact_penjualan.id_pasien');
-		$this->db->join('excel_obat','excel_obat.obat_id = fact_penjualan.id_obat');
-		$this->db->join('excel_ruang','excel_ruang.ruang_id = fact_penjualan.id_ruang');
-		$this->db->join('excel_produsen','excel_produsen.produsen_id = fact_penjualan.id_produsen');
-		$this->db->join('excel_transaksi','excel_transaksi.transaksi_id = fact_penjualan.id_transaksi');
-		$this->db->join('dim_waktu','dim_waktu.waktu_id = fact_penjualan.id_waktu');
-		$this->db->join('dim_transaksi','dim_transaksi.transaksi_id = fact_penjualan.id_transaksi');
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('dim_waktu','dim_waktu.id_waktu = fact_peminjaman.id_waktu');
 		$records = $this->db->get()->result();
 
 		$data = array();
 
 		foreach($records as $record ){
 
+			if ($record->anggota_umum_l != null){
+				$status = 'umum';
+				$jenis_kelamin = 'laki-laki';
+			}elseif ($record->anggota_umum_p != null){
+				$status = 'umum';
+				$jenis_kelamin = 'perempuan';
+			}elseif ($record->anggota_mahasiswa_l != null){
+				$status = 'mahasiswa';
+				$jenis_kelamin = 'laki-laki';
+			}elseif ($record->anggota_mahasiswa_p != null){
+				$status = 'mahasiswa';
+				$jenis_kelamin = 'laki-laki';
+			}elseif ($record->anggota_pelajar_l != null){
+				$status = 'pelajar';
+				$jenis_kelamin = 'laki-laki';
+			}elseif ($record->anggota_pelajar_p != null){
+				$status = 'pelajar';
+				$jenis_kelamin = 'perempuan';
+			}
+
 			$data[] = array(
-				"obat_kode"=>$record->obat_kode,
-				"obat_nama"=>$record->obat_nama,
-				"obat_golongan"=>$record->obat_golongan,
-				"obat_bentuk"=>$record->obat_bentuk,
-				"obat_depo"=>$record->obat_depo,
-				"produsen_nama"=>$record->produsen_nama,
-				"pasien_nama"=>$record->pasien_nama,
-				"pasien_jenis_kelamin"=>$record->pasien_jenis_kelamin,
-				"pasien_umur"=>$record->pasien_umur,
-				"ruang_poliklinik"=>$record->ruang_poliklinik,
-				"ruang_jenis_masuk"=>$record->ruang_jenis_masuk,
-				"dokter_nama"=>$record->dokter_nama,
-				"transaksi_kelompok"=>$record->transaksi_kelompok,
-				"transaksi_harga"=>$record->transaksi_harga,
-				"transaksi_jumlah"=>$record->transaksi_jumlah,
-				"transaksi_total"=>$record->transaksi_total,
-				"transaksi_cara_bayar"=>$record->transaksi_cara_bayar,
-				"transaksi_tanggal"=>$record->transaksi_tanggal,
+				"anggota_nama"=>$record->anggota_nama,
+				"anggota_nomor"=>$record->anggota_nomor,
+				"anggota_jenis_kelamin"=>ucwords($jenis_kelamin),
+				"anggota_status"=>ucwords($status),
+				"buku_judul"=>$record->buku_judul,
+				"buku_kode"=>$record->buku_kode,
+				"buku_edisi"=>$record->buku_edisi,
+				"buku_penerbit"=>$record->buku_penerbit,
+				"time"=>$record->time,
 			);
 		}
 
