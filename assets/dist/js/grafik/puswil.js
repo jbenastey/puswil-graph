@@ -17,7 +17,19 @@ $(document).ready(function () {
 		cache: false,
 		dataType: 'json',
 		success: function (response) {
-			console.log(response);
+			console.log(response.mahasiswa,response.pelajar,response.umum);
+			var anggotaMax = Math.max(response.mahasiswa,response.pelajar,response.umum);
+			var anggotaBanyak = '';
+			if (anggotaMax === response.mahasiswa){
+				anggotaBanyak = 'Mahasiswa';
+			} else if (anggotaMax === response.pelajar){
+				anggotaBanyak = 'Pelajar';
+			} else if (anggotaMax === response.umum){
+				anggotaBanyak = 'Umum';
+			}
+
+			$('#anggota-banyak').html(anggotaBanyak);
+			console.log(Math.max(response.mahasiswa,response.pelajar,response.umum));
 			var anggota_bar = $('#anggota-bar-chart');
 			var salesChart = new Chart(anggota_bar, {
 				type: 'bar',
@@ -255,6 +267,19 @@ $(document).ready(function () {
 		dataType: 'json',
 		success: function (response) {
 			console.log(response);
+
+			var pengunjungMax = Math.max(response.mahasiswa,response.pelajar,response.umum);
+			var pengunjungBanyak = '';
+			if (pengunjungMax === response.mahasiswa){
+				pengunjungBanyak = 'Mahasiswa';
+			} else if (pengunjungMax === response.pelajar){
+				pengunjungBanyak = 'Pelajar';
+			} else if (pengunjungMax === response.umum){
+				pengunjungBanyak = 'Umum';
+			}
+
+			$('#pengunjung-banyak').html(pengunjungBanyak);
+
 			var anggota_bar = $('#pengunjung-bar-chart');
 			var salesChart = new Chart(anggota_bar, {
 				type: 'bar',
@@ -507,8 +532,6 @@ $(document).ready(function () {
 			console.log(pengunjungBanyak);
 			$('#buku-banyak').html(response.buku[0].buku_judul +'<br>'+response.buku[0].buku_kode);
 			$('#pinjam-banyak').html(response.pinjam[0].peminjam_nama);
-			$('#anggota-banyak').html(anggotaBanyak);
-			$('#pengunjung-banyak').html(pengunjungBanyak);
 
 			var buku = [];
 			var jumlahBuku = [];
@@ -783,4 +806,719 @@ $(document).ready(function () {
 			});
 		}
 	})
+
+	var $salesChart = $('#transaksi-chart');
+	var $salesChart1 = $('#transaksi-chart1');
+	$.ajax({
+		url : root + 'grafik-tahun',
+		type : 'GET',
+		async : true,
+		cache : false,
+		dataType : 'json',
+		success: function (response) {
+			console.log(response);
+			var salesChart  = new Chart($salesChart, {
+				type   : 'line',
+				data   : {
+					labels  : ["2015","2016","2017","2018","2019","2020"],
+					datasets: [
+						{
+							label		   : 'Jumlah Transaksi',
+							// backgroundColor: '#007bff',
+							borderColor    : '#007bff',
+							data           : [
+								response.data2015,
+								response.data2016,
+								response.data2017,
+								response.data2018,
+								response.data2019,
+								response.data2020,
+							]
+						},
+					]
+				},
+				options: {
+					maintainAspectRatio: false,
+					tooltips           : {
+						mode     : mode,
+						intersect: intersect
+					},
+					hover              : {
+						mode     : mode,
+						intersect: intersect
+					},
+					title:{ display: true,
+						text: 'Data Transaksi'},
+					legend             : {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						yAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+			var salesChart2  = new Chart($salesChart1, {
+				type   : 'bar',
+				data   : {
+					labels  : ["2015","2016","2017","2018","2019","2020"],
+					datasets: [
+						{
+							label		   : 'Jumlah Transaksi',
+							backgroundColor: '#00ff32',
+							borderColor    : '#00ff32',
+							data           : [
+								response.data2015,
+								response.data2016,
+								response.data2017,
+								response.data2018,
+								response.data2019,
+								response.data2020,
+							]
+						},
+
+					]
+				},
+				options: {
+					onClick: function (event, array) {
+						let element = this.getElementAtEvent(event);
+						if (element.length > 0) {
+							var series = element[0]._model.datasetLabel;
+							var label = element[0]._model.label;
+							var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+							// transaksi_tahun(label);
+							transaksi_bulan(label);
+						}
+					},
+					maintainAspectRatio: false,
+					tooltips           : {
+						mode     : mode,
+						intersect: intersect
+					},
+					hover              : {
+						mode     : mode,
+						intersect: intersect
+					},
+					title:{ display: true,
+						text: 'Jumlah seluruh transaksi berdasarkan tahun'},
+					legend             : {
+						display: true,
+						position: 'bottom',
+					},
+					scales: {
+						yAxes:[{
+							ticks: {
+								beginAtZero : true
+							}
+						}]
+					}
+				}
+			});
+		},
+		error: function (response) {
+			console.log(response.status + 'error');
+		}
+	});
+
+	function transaksi_bulan(tahun) {
+		console.log(tahun);
+		var html = '';
+		$.ajax({
+			url: root + 'grafik-bulan/' + tahun,
+			type: 'GET',
+			async: true,
+			cache: false,
+			dataType: 'json',
+			success: function (response) {
+				console.log(response);
+				html += '' +
+					'<h3>Grafik Peminjaman Tahun ' + tahun + '</h3>' +
+						'<div class="chart">' +
+						'<canvas id="obat-chart6" width="1000" height="280"></canvas>' +
+					'</div>'+
+					'<div class="chart">' +
+						'<canvas id="obat-chart7" width="1000" height="280"></canvas>' +
+					'</div>'
+					;
+				$('#detail3').html(html);
+
+				var $salesChart = $('#obat-chart6');
+				var salesChart3 = new Chart($salesChart, {
+					type: 'bar',
+					data: {
+						labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+						datasets: [
+							{
+								label: 'Jumlah',
+								backgroundColor:
+									"#ff00ff",
+								borderColor:
+									"#ff00ff",
+								data:
+									[
+										response.jan.length,
+										response.feb.length,
+										response.mar.length,
+										response.apr.length,
+										response.mei.length,
+										response.jun.length,
+										response.jul.length,
+										response.agu.length,
+										response.sep.length,
+										response.okt.length,
+										response.nov.length,
+										response.des.length,
+									]
+							}
+
+						]
+					},
+					options: {
+						onClick: function (event, array) {
+							let element = this.getElementAtEvent(event);
+							if (element.length > 0) {
+								var series = element[0]._model.datasetLabel;
+								var label = element[0]._model.label;
+								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+								transaksi_tahun(tahun,label);
+							}
+						},
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+					}
+				});
+
+				var $salesChart1 = $('#obat-chart7');
+				var salesChart4 = new Chart($salesChart1, {
+					type: 'line',
+					data: {
+						labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+						datasets: [
+							{
+								label: 'Jumlah',
+								borderColor:
+									"#ff00ff",
+								data:
+									[
+										response.jan.length,
+										response.feb.length,
+										response.mar.length,
+										response.apr.length,
+										response.mei.length,
+										response.jun.length,
+										response.jul.length,
+										response.agu.length,
+										response.sep.length,
+										response.okt.length,
+										response.nov.length,
+										response.des.length,
+									]
+							}
+
+						]
+					},
+					options: {
+						onClick: function (event, array) {
+							let element = this.getElementAtEvent(event);
+							if (element.length > 0) {
+								var series = element[0]._model.datasetLabel;
+								var label = element[0]._model.label;
+								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+								transaksi_tahun(tahun,label);
+							}
+						},
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+					}
+				});
+			}
+		});
+	}
+
+	function transaksi_tahun(tahun,bulan) {
+		console.log(tahun);
+		console.log(bulan);
+		var bulannya = angkaBulan(bulan);
+		console.log(bulannya);
+		var html = '';
+		$.ajax({
+			url: root + 'grafik-bulan-anggota/' + tahun + '/' + bulannya,
+			type: 'GET',
+			async: true,
+			cache: false,
+			dataType: 'json',
+			success: function (response) {
+				console.log(response);
+				html += '' +
+					'<h3>Grafik Transaksi '+bulan+' ' + tahun + '</h3>' +
+					'<div class="row" id="banyak2">\n' +
+					'\t\t\t\t<div class="col-8">\n' +
+					'\t\t\t\t\t<div class="card">\n' +
+					'\t\t\t\t\t\t<div class="card-body">\n' +
+					'\t\t\t\t\t\t\t<div class="chart">\n' +
+					'\t\t\t\t\t\t\t\t<canvas id="anggota-bulan-bar-chart" width="auto" height="280"></canvas>\n' +
+					'\t\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>\n' +
+					'\t\t\t\t<div class="col-4">\n' +
+					'\t\t\t\t\t<div class="card">\n' +
+					'\t\t\t\t\t\t<div class="card-body">\n' +
+					'\t\t\t\t\t\t\t<div class="chart">\n' +
+					'\t\t\t\t\t\t\t\t<canvas id="anggota-bulan-pie-chart" width="auto" height="280"></canvas>\n' +
+					'\t\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>\n' +
+					'\t\t\t</div>\n' +
+					'\t\t\t<div class="row">\n' +
+					'\t\t\t\t<div class="col-8">\n' +
+					'\t\t\t\t\t<div class="card">\n' +
+					'\t\t\t\t\t\t<div class="card-body">\n' +
+					'\t\t\t\t\t\t\t<div class="chart">\n' +
+					'\t\t\t\t\t\t\t\t<canvas id="anggota-bulan-bar-chart2" width="auto" height="280"></canvas>\n' +
+					'\t\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>\n' +
+					'\t\t\t\t<div class="col-4">\n' +
+					'\t\t\t\t\t<div class="card">\n' +
+					'\t\t\t\t\t\t<div class="card-body">\n' +
+					'\t\t\t\t\t\t\t<div class="chart">\n' +
+					'\t\t\t\t\t\t\t\t<canvas id="anggota-bulan-pie-chart2" width="auto" height="280"></canvas>\n' +
+					'\t\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>\n' +
+					'\t\t\t</div>' +
+					'\t\t\t<div class="row">\n' +
+					'\t\t\t\t<div class="col-8">\n' +
+					'\t\t\t\t\t<div class="card">\n' +
+					'\t\t\t\t\t\t<div class="card-body">\n' +
+					'\t\t\t\t\t\t\t<div class="chart">\n' +
+					'\t\t\t\t\t\t\t\t<canvas id="pengunjung-bulan-bar-chart" width="auto" height="280"></canvas>\n' +
+					'\t\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>\n' +
+					'\t\t\t\t<div class="col-4">\n' +
+					'\t\t\t\t\t<div class="card">\n' +
+					'\t\t\t\t\t\t<div class="card-body">\n' +
+					'\t\t\t\t\t\t\t<div class="chart">\n' +
+					'\t\t\t\t\t\t\t\t<canvas id="pengunjung-bulan-pie-chart" width="auto" height="280"></canvas>\n' +
+					'\t\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t\t</div>\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>\n' +
+					'\t\t\t</div>'
+				;
+
+				$('#transaksi-detail').html(html);
+
+				var anggota_bar = $('#anggota-bulan-bar-chart');
+				var salesChart = new Chart(anggota_bar, {
+					type: 'bar',
+					data: {
+						labels: ["Mahasiswa", "Umum", "Pelajar"],
+						datasets: [
+							{
+								label: 'jumlah',
+								backgroundColor:[
+									"#ffd200",
+									"#00a902",
+									"#DC143C",
+								],
+								borderColor:[
+									"#ffd200",
+									"#00a902",
+									"#DC143C",
+								],
+								data: [
+									response.mahasiswa,
+									response.umum,
+									response.pelajar,]
+							}]
+					},
+					options: {
+						onClick: function (event, array) {
+							let element = this.getElementAtEvent(event);
+							if (element.length > 0) {
+								var series = element[0]._model.datasetLabel;
+								var label = element[0]._model.label;
+								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+								obat_tahun(label);
+							}
+						}
+						,
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Jumlah Anggota Berdasarkan Kategori',
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+						scales: {
+							yAxes:[{
+								ticks: {
+									beginAtZero : true
+								}
+							}]
+						}
+					}
+				});
+				var anggota_pie = $('#anggota-bulan-pie-chart');
+				var salesChart2 = new Chart(anggota_pie, {
+					type: 'pie',
+					data: {
+						labels: ["Mahasiswa", "Umum", "Pelajar"],
+						datasets: [
+							{
+								label: 'bentuk',
+								backgroundColor: [
+									"#ffd200",
+									"#00a902",
+									"#DC143C",],
+								borderColor: [
+									"#ffd200",
+									"#00a902",
+									"#DC143C",],
+								data: [
+									response.mahasiswa,
+									response.umum,
+									response.pelajar,
+								]
+							}]
+
+					},
+					options: {
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect,
+							callbacks: {
+								label: function(tooltipItem, data) {
+									var dataset = data.datasets[tooltipItem.datasetIndex];
+									var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+										return previousValue + currentValue;
+									});
+									var currentValue = dataset.data[tooltipItem.index];
+									var percentage = Math.floor(((currentValue/total) * 100)+0.5);
+									return percentage + "%";
+								}
+							}
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Persentasi Anggota Berdasarkan Kategori'
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+					}
+				});
+				var anggota_bar2 = $('#anggota-bulan-bar-chart2');
+				var salesChart = new Chart(anggota_bar2, {
+					type: 'bar',
+					data: {
+						labels: ["Laki-laki", "Perempuan"],
+						datasets: [
+							{
+								label: 'jumlah',
+								backgroundColor:[
+									"#0011de",
+									"#ff00d8",,
+								],
+								borderColor:[
+									"#0011de",
+									"#ff00d8",,
+								],
+								data: [
+									response.pria,
+									response.wanita,]
+							}]
+					},
+					options: {
+						onClick: function (event, array) {
+							let element = this.getElementAtEvent(event);
+							if (element.length > 0) {
+								var series = element[0]._model.datasetLabel;
+								var label = element[0]._model.label;
+								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+								obat_tahun(label);
+							}
+						}
+						,
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Jumlah Anggota Berdasarkan Jenis Kelamin',
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+						scales: {
+							yAxes:[{
+								ticks: {
+									beginAtZero : true
+								}
+							}]
+						}
+					}
+				});
+				var anggota_pie2 = $('#anggota-bulan-pie-chart2');
+				var salesChart2 = new Chart(anggota_pie2, {
+					type: 'pie',
+					data: {
+						labels: ["Laki-laki", "Perempuan"],
+						datasets: [
+							{
+								label: 'bentuk',
+								backgroundColor: [
+									"#0011de",
+									"#ff00d8",],
+								borderColor: [
+									"#0011de",
+									"#ff00d8",],
+								data: [
+									response.pria,
+									response.wanita,
+								]
+							}]
+
+					},
+					options: {
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect,
+							callbacks: {
+								label: function(tooltipItem, data) {
+									var dataset = data.datasets[tooltipItem.datasetIndex];
+									var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+										return previousValue + currentValue;
+									});
+									var currentValue = dataset.data[tooltipItem.index];
+									var percentage = Math.floor(((currentValue/total) * 100)+0.5);
+									return percentage + "%";
+								}
+							}
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Persentasi Anggota Berdasarkan Jenis Kelamin'
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+					}
+				});
+
+				var pengunjung_bar = $('#pengunjung-bulan-bar-chart');
+				var salesChart = new Chart(pengunjung_bar, {
+					type: 'bar',
+					data: {
+						labels: ["Mahasiswa", "Umum", "Pelajar"],
+						datasets: [
+							{
+								label: 'jumlah',
+								backgroundColor:[
+									"#ffd200",
+									"#00a902",
+									"#DC143C",
+								],
+								borderColor:[
+									"#ffd200",
+									"#00a902",
+									"#DC143C",
+								],
+								data: [
+									response.mahasiswa,
+									response.umum,
+									response.pelajar,]
+							}]
+					},
+					options: {
+						onClick: function (event, array) {
+							let element = this.getElementAtEvent(event);
+							if (element.length > 0) {
+								var series = element[0]._model.datasetLabel;
+								var label = element[0]._model.label;
+								var value = this.data.datasets[element[0]._datasetIndex].data[element[0]._index];
+								obat_tahun(label);
+							}
+						}
+						,
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Jumlah Pengunjung Berdasarkan Kategori',
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+						scales: {
+							yAxes:[{
+								ticks: {
+									beginAtZero : true
+								}
+							}]
+						}
+					}
+				});
+				var pengunjung_pie = $('#pengunjung-bulan-pie-chart');
+				var salesChart2 = new Chart(pengunjung_pie, {
+					type: 'pie',
+					data: {
+						labels: ["Mahasiswa", "Umum", "Pelajar"],
+						datasets: [
+							{
+								label: 'bentuk',
+								backgroundColor: [
+									"#ffd200",
+									"#00a902",
+									"#DC143C",],
+								borderColor: [
+									"#ffd200",
+									"#00a902",
+									"#DC143C",],
+								data: [
+									response.mahasiswa,
+									response.umum,
+									response.pelajar,
+								]
+							}]
+
+					},
+					options: {
+						maintainAspectRatio: false,
+						tooltips: {
+							mode: mode,
+							intersect: intersect,
+							callbacks: {
+								label: function(tooltipItem, data) {
+									var dataset = data.datasets[tooltipItem.datasetIndex];
+									var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+										return previousValue + currentValue;
+									});
+									var currentValue = dataset.data[tooltipItem.index];
+									var percentage = Math.floor(((currentValue/total) * 100)+0.5);
+									return percentage + "%";
+								}
+							}
+						},
+						hover: {
+							mode: mode,
+							intersect: intersect
+						},
+						title: {
+							display: true,
+							text: 'Persentasi Pengunjung Berdasarkan Kategori'
+						},
+						legend: {
+							display: true,
+							position: 'bottom',
+						},
+					}
+				});
+			},
+			error: function (response) {
+				console.log(response.status + 'error');
+			}
+		})
+	}
+
 })
+
+function angkaBulan(bulan) {
+	if (bulan === 'Januari'){
+		return '01';
+	}else if (bulan === 'Februari'){
+		return '02';
+	}else if (bulan === 'Maret'){
+		return '03';
+	}else if (bulan === 'April'){
+		return '04';
+	}else if (bulan === 'Mei'){
+		return '05';
+	}else if (bulan === 'Juni'){
+		return '06';
+	}else if (bulan === 'Juli'){
+		return '07';
+	}else if (bulan === 'Agustus'){
+		return '08';
+	}else if (bulan === 'September'){
+		return '09';
+	}else if (bulan === 'Oktober'){
+		return '10';
+	}else if (bulan === 'November'){
+		return '11';
+	}else if (bulan === 'Desember'){
+		return '12';
+	}
+}
+
+

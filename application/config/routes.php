@@ -98,3 +98,8 @@ $route['pilih-laporan-bulan'] = 'ProsesController/pilihLaporanBulan';
 $route['laporan-bulan/(:any)'] = 'ProsesController/laporanBulan/$1';
 
 $route['grafik'] = 'welcome/grafik';
+
+$route['grafik-tahun'] = 'ProsesController/grafik_tahun';
+$route['grafik-bulan/(:any)'] = 'ProsesController/grafik_bulan/$1';
+$route['grafik-bulan-anggota/(:any)/(:any)'] = 'ProsesController/grafikBulanAnggota/$1/$2';
+$route['grafik-bulan-pengunjung/(:any)/(:any)'] = 'ProsesController/grafikBulanPengunjung/$1/$2';

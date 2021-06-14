@@ -18,65 +18,55 @@
 	<div class="container-fluid">
 		<!-- Small boxes (Stat box) -->
 		<div class="row d-print-none">
-			<div class="col-lg-3 col-6">
-				<!-- small box -->
-				<div class="small-box bg-secondary-gradient">
-					<div class="inner">
-						<h3>&nbsp;</h3>
-
-						<p>Upload </p>
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<h3>Selamat Datang Petugas</h3>
+						<hr>
+						<div class="row">
+							<div class="col-lg-3 col-6">
+								<!-- small box -->
+								<div class="small-box">
+									<div class="inner">
+										<img src="<?= base_url('assets/dist/img/beranda/1486505253-folder-folder-up-folder-upload-update-folder-upload_81427.png') ?>" alt="" style="width: 100%;padding: 7%">
+									</div>
+									<a class="small-box-footer" data-toggle="modal" data-target="#exampleModal">
+										Upload Data <i class="fa fa-arrow-circle-right"></i>
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-3 col-6">
+								<!-- small box -->
+								<div class="small-box">
+									<div class="inner">
+										<img src="<?= base_url('assets/dist/img/beranda/Excel2_35735.png') ?>" alt="" style="width: 100%;padding: 6%">
+									</div>
+									<a href="<?= base_url('mentah') ?>" class="small-box-footer text-dark">Data Excel <i
+											class="fa fa-arrow-circle-right"></i></a>
+								</div>
+							</div>
+							<div class="col-lg-3 col-6">
+								<!-- small box -->
+								<div class="small-box">
+									<div class="inner">
+										<img src="<?= base_url('assets/dist/img/beranda/book_open_book_read_icon_186999.png') ?>" alt="" style="width: 100%;padding: 7%">
+									</div>
+									<a href="<?= base_url('dimensi') ?>" class="small-box-footer text-dark">Data Dimensi <i
+											class="fa fa-arrow-circle-right"></i></a>
+								</div>
+							</div>
+							<div class="col-lg-3 col-6">
+								<!-- small box -->
+								<div class="small-box">
+									<div class="inner">
+										<img src="<?= base_url('assets/dist/img/beranda/book_open_book_read_icon_186989.png') ?>" alt="" style="width: 100%;padding: 7%">
+									</div>
+									<a href="<?= base_url('fakta') ?>" class="small-box-footer text-dark">Data Fakta <i
+											class="fa fa-arrow-circle-right"></i></a>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="icon">
-						<i class="ion ion-upload"></i>
-					</div>
-					<a class="small-box-footer" data-toggle="modal" data-target="#exampleModal">
-						Upload Data <i class="fa fa-arrow-circle-right"></i>
-					</a>
-				</div>
-			</div>
-			<div class="col-lg-3 col-6">
-				<!-- small box -->
-				<div class="small-box bg-success-gradient">
-					<div class="inner">
-						<h3>&nbsp;</h3>
-
-						<p>Data Excel</p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-file-excel-o"></i>
-					</div>
-					<a href="<?= base_url('mentah') ?>" class="small-box-footer">Lihat Data <i
-							class="fa fa-arrow-circle-right"></i></a>
-				</div>
-			</div>
-			<div class="col-lg-3 col-6">
-				<!-- small box -->
-				<div class="small-box bg-info-gradient">
-					<div class="inner">
-						<h3>&nbsp;</h3>
-
-						<p>Tabel Dimensi </p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-file-o"></i>
-					</div>
-					<a href="<?= base_url('dimensi') ?>" class="small-box-footer">Lihat Data <i
-							class="fa fa-arrow-circle-right"></i></a>
-				</div>
-			</div>
-			<div class="col-lg-3 col-6">
-				<!-- small box -->
-				<div class="small-box bg-primary-gradient">
-					<div class="inner">
-						<h3>&nbsp;</h3>
-
-						<p>Tabel Fakta </p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-file"></i>
-					</div>
-					<a href="<?= base_url('fakta') ?>" class="small-box-footer">Lihat Data <i
-							class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 		</div>

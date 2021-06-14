@@ -54,7 +54,7 @@
 		<div>
 			<div class="row">
 				<div class="col-lg-3 col-6">
-					<div class="small-box bg-primary-gradient">
+					<div class="small-box bg-success-gradient">
 						<div class="inner">
 							<h4>&nbsp;<span id="buku-banyak"></span></h4>
 
@@ -68,9 +68,10 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-6">
-					<div class="small-box bg-primary-gradient">
+					<div class="small-box bg-success-gradient">
 						<div class="inner">
 							<h4>&nbsp;<span id="pinjam-banyak"></span></h4>
+							<br>
 							<br>
 							<p>Peminjam Terbanyak </p>
 						</div>
@@ -82,10 +83,10 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-6">
-					<div class="small-box bg-primary-gradient">
+					<div class="small-box bg-success-gradient">
 						<div class="inner">
 							<h4>&nbsp;<span id="anggota-banyak"></span></h4>
-
+							<br>
 							<p>Kategori Anggota Peminjam Terbanyak</p>
 						</div>
 						<div class="icon">
@@ -96,9 +97,10 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-6">
-					<div class="small-box bg-primary-gradient">
+					<div class="small-box bg-success-gradient">
 						<div class="inner">
 							<h4>&nbsp;<span id="pengunjung-banyak"></span></h4>
+							<br>
 
 							<p>Kategori Pengunjung Peminjam Terbanyak </p>
 						</div>
@@ -174,20 +176,20 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body">
-							<div class="">
-								<select name="" id="tahun" class="form-control d-print-none">
-									<option selected disabled>- Pilih Tahun -</option>
-									<?php
-									foreach($getHapus as $key=>$value):
-										?>
-										<option value="<?= $value['tahun_waktu'] ?>"><?= $value['tahun_waktu'] ?></option>
-									<?php
-									endforeach;
-									?>
-								</select>
-							</div>
 							<div class="chart">
-								<canvas id="peminjam-line-chart" width="auto" height="280"></canvas>
+								<canvas id="transaksi-chart" width="1000" height="280"></canvas>
+							</div>
+							<hr>
+							<div class="chart">
+								<canvas id="transaksi-chart1" width="1000" height="280"></canvas>
+							</div>
+							<hr>
+							<div id="detail3">
+
+							</div>
+							<hr>
+							<div id="transaksi-detail">
+
 							</div>
 						</div>
 					</div>

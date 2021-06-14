@@ -165,4 +165,43 @@ class ProsesModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+	public function transaksi_tahun($tahun){
+		$this->db->select('*');
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('excel_buku','excel_buku.buku_id = fact_peminjaman.id_buku');
+		$this->db->join('excel_peminjam','excel_peminjam.peminjam_id = fact_peminjaman.id_peminjam');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('dim_waktu','dim_waktu.id_waktu = fact_peminjaman.id_waktu');
+		$this->db->like('tahun_waktu',$tahun);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function lihatBulanAnggota($tahun,$bulan){
+		$this->db->select(
+			'*'
+		);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_anggota','excel_anggota.anggota_id = fact_peminjaman.id_anggota');
+		$this->db->join('dim_waktu','dim_waktu.id_waktu = fact_peminjaman.id_waktu');
+		$this->db->like('tahun_waktu', $tahun);
+		$this->db->like('bulan_waktu', $bulan);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function lihatBulanPengunjung($tahun,$bulan){
+		$this->db->select(
+			'*'
+		);
+		$this->db->from('fact_peminjaman');
+		$this->db->join('excel_pengunjung','excel_pengunjung.pengunjung_id = fact_peminjaman.id_pengunjung');
+		$this->db->join('dim_waktu','dim_waktu.id_waktu = fact_peminjaman.id_waktu');
+		$this->db->like('tahun_waktu', $tahun);
+		$this->db->like('bulan_waktu', $bulan);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 }

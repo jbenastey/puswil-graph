@@ -449,8 +449,74 @@ class ProsesController extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function grafikBulanAnggota($tahun,$bulan){
+		$anggota = $this->proses->lihatBulanAnggota($tahun,$bulan);
+		$data = array(
+			'umum' => 0,
+			'mahasiswa' => 0,
+			'pelajar' => 0,
+			'pria' => 0,
+			'wanita' => 0,
+		);
+		foreach ($anggota as $key=>$value) {
+			if ($value['anggota_umum_l'] != null){
+				$data['umum'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['anggota_umum_p'] != null){
+				$data['umum'] += 1;
+				$data['wanita'] += 1;
+			}elseif ($value['anggota_mahasiswa_l'] != null){
+				$data['mahasiswa'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['anggota_mahasiswa_p'] != null){
+				$data['mahasiswa'] += 1;
+				$data['wanita'] += 1;
+			}elseif ($value['anggota_pelajar_l'] != null){
+				$data['pelajar'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['anggota_pelajar_p'] != null){
+				$data['pelajar'] += 1;
+				$data['wanita'] += 1;
+			}
+		}
+		echo json_encode($data);
+	}
+
 	public function grafik_pengunjung(){
 		$pengunjung = $this->proses->lihat('excel_pengunjung');
+		$data = array(
+			'umum' => 0,
+			'mahasiswa' => 0,
+			'pelajar' => 0,
+			'pria' => 0,
+			'wanita' => 0,
+		);
+		foreach ($pengunjung as $key=>$value) {
+			if ($value['pengunjung_umum_l'] != null){
+				$data['umum'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['pengunjung_umum_p'] != null){
+				$data['umum'] += 1;
+				$data['wanita'] += 1;
+			}elseif ($value['pengunjung_mahasiswa_l'] != null){
+				$data['mahasiswa'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['pengunjung_mahasiswa_p'] != null){
+				$data['mahasiswa'] += 1;
+				$data['wanita'] += 1;
+			}elseif ($value['pengunjung_pelajar_l'] != null){
+				$data['pelajar'] += 1;
+				$data['pria'] += 1;
+			}elseif ($value['pengunjung_pelajar_p'] != null){
+				$data['pelajar'] += 1;
+				$data['wanita'] += 1;
+			}
+		}
+		echo json_encode($data);
+	}
+
+	public function grafikBulanPengunjung($tahun,$bulan){
+		$pengunjung = $this->proses->lihatBulanPengunjung($tahun,$bulan);
 		$data = array(
 			'umum' => 0,
 			'mahasiswa' => 0,
@@ -627,5 +693,64 @@ class ProsesController extends CI_Controller
 		$this->load->view('templates/header');
 		$this->load->view('laporan/cetak', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function grafik_tahun()
+	{
+		$obat = array(
+			'data2015' => count($this->proses->transaksi_tahun('2015')),
+			'data2016' => count($this->proses->transaksi_tahun('2016')),
+			'data2017' => count($this->proses->transaksi_tahun('2017')),
+			'data2018' => count($this->proses->transaksi_tahun('2018')),
+			'data2019' => count($this->proses->transaksi_tahun('2019')),
+			'data2020' => count($this->proses->transaksi_tahun('2020')),
+		);
+		echo json_encode($obat);
+	}
+
+	public function grafik_bulan($tahun){
+		$obat = $this->proses->transaksi_tahun($tahun);
+		$data = array(
+			'jan' => array(),
+			'feb' => array(),
+			'mar' => array(),
+			'apr' => array(),
+			'mei' => array(),
+			'jun' => array(),
+			'jul' => array(),
+			'agu' => array(),
+			'sep' => array(),
+			'okt' => array(),
+			'nov' => array(),
+			'des' => array(),
+		);
+		foreach ($obat as $key=>$value) {
+			if ($value['bulan_waktu'] == '01'){
+				array_push($data['jan'],$value);
+			}elseif ($value['bulan_waktu'] == '02'){
+				array_push($data['feb'],$value);
+			}elseif ($value['bulan_waktu'] == '03'){
+				array_push($data['mar'],$value);
+			}elseif ($value['bulan_waktu'] == '04'){
+				array_push($data['apr'],$value);
+			}elseif ($value['bulan_waktu'] == '05'){
+				array_push($data['mei'],$value);
+			}elseif ($value['bulan_waktu'] == '06'){
+				array_push($data['jun'],$value);
+			}elseif ($value['bulan_waktu'] == '07'){
+				array_push($data['jul'],$value);
+			}elseif ($value['bulan_waktu'] == '08'){
+				array_push($data['agu'],$value);
+			}elseif ($value['bulan_waktu'] == '09'){
+				array_push($data['sep'],$value);
+			}elseif ($value['bulan_waktu'] == '10'){
+				array_push($data['okt'],$value);
+			}elseif ($value['bulan_waktu'] == '11'){
+				array_push($data['nov'],$value);
+			}elseif ($value['bulan_waktu'] == '12'){
+				array_push($data['des'],$value);
+			}
+		}
+		echo json_encode($data);
 	}
 }
